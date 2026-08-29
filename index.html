@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SYNTHEX | Robótica, Bots, Automatizaciones & Software Store</title>
+  <meta name="description" content="Plataforma de desarrollo y comercialización de bots, automatizaciones RPA, sistemas de robótica y software con pagos seguros por Stripe." />
+
+  <!-- Google Fonts: Syne, Inter, JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- CSS Stylesheets -->
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/terminal.css" />
+</head>
+<body>
+
+  <!-- TOP NAVIGATION BAR -->
+  <header class="navbar">
+    <div class="container nav-container">
+      <a href="#home" class="brand-logo">
+        <div class="logo-symbol">
+          <!-- Vectorial Geometric Isotype based on Bokhua & Peters principles -->
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="#00F0FF" stroke-width="2" stroke-linejoin="round"/>
+            <path d="M2 17L12 22L22 17" stroke="#8B5CF6" stroke-width="2" stroke-linejoin="round"/>
+            <path d="M2 12L12 17L22 12" stroke="#10B981" stroke-width="2" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div>
+          <span>SYNTHEX</span>
+          <span class="brand-name-sub">ROBOTICS & DEV</span>
+        </div>
+      </a>
+
+      <!-- Desktop & Mobile Nav Links -->
+      <nav>
+        <ul class="nav-links" id="navLinks">
+          <li><a href="#home" class="nav-link active">Inicio</a></li>
+          <li><a href="#shop" class="nav-link">Zona de Venta</a></li>
+          <li><a href="#projects" class="nav-link">Proyectos</a></li>
+          <li><a href="#about" class="nav-link">Acerca de Nosotros</a></li>
+          <li id="navAdminLink" style="display: none;">
+            <a href="#admin" class="nav-link nav-admin-link">👑 Panel Admin</a>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- Nav Actions (Cart & Auth) -->
+      <div class="nav-actions">
+        <button class="btn-nav-cart" id="navCartBtn" title="Ver Carrito de Compras">
+          <span>🛒</span>
+          <span class="cart-counter-badge" id="cartBadge" style="display: none;">0</span>
+        </button>
+
+        <button class="btn-nav-auth" id="navAuthBtn">
+          <span>Acceder / Login</span>
+          <span class="nav-btn-icon">→</span>
+        </button>
+
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Menú">
+          ☰
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN SPA CONTENT RENDER CONTAINER -->
+  <main id="mainContent">
+    <!-- Rendered dynamically by js/app.js -->
+  </main>
+
+  <!-- SLIDE-OUT CART DRAWER -->
+  <div class="cart-overlay" id="cartOverlay"></div>
+  <aside class="cart-drawer" id="cartDrawer">
+    <div class="cart-drawer-header">
+      <h3>Carrito de Compras</h3>
+      <button class="btn-close-drawer" id="closeCartBtn">✕</button>
+    </div>
+
+    <div class="cart-items-list" id="cartItemsList">
+      <!-- Injected by js/app.js -->
+    </div>
+
+    <div class="cart-drawer-footer" id="cartDrawerFooter">
+      <div class="cart-subtotal-row">
+        <span>Total:</span>
+        <strong class="text-green mono" id="cartTotalVal">$0 MXN</strong>
+      </div>
+      <button class="btn btn-stripe-pay btn-block btn-lg" onclick="SynthexAppInstance.checkoutCartWithStripe()">
+        💳 Pagar con Stripe Checkout (Tarjetas / Apple & Google Pay)
+      </button>
+    </div>
+  </aside>
+
+  <!-- GLOBAL FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <!-- Col 1: Brand -->
+        <div>
+          <div class="brand-logo">
+            <div class="logo-symbol">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="#00F0FF" stroke-width="2"/>
+                <path d="M2 17L12 22L22 17" stroke="#8B5CF6" stroke-width="2"/>
+              </svg>
+            </div>
+            <span>SYNTHEX</span>
+          </div>
+          <p class="footer-brand-desc">
+            Plataforma de ingeniería especializada en el desarrollo y comercialización de bots, automatizaciones de procesos y robótica cinemática con integración Stripe.
+          </p>
+          <div class="system-status-indicator">
+            <span class="pulse-dot-green"></span>
+            <span>SISTEMAS OPERACIONALES • 100% ONLINE</span>
+          </div>
+        </div>
+
+        <!-- Col 2: Navigation Links -->
+        <div>
+          <h4 class="footer-col-title">Plataforma</h4>
+          <ul class="footer-links-list">
+            <li><a href="#home">Inicio</a></li>
+            <li><a href="#shop">Zona de Venta (Bots & Software)</a></li>
+            <li><a href="#projects">Zona de Proyectos & Repositorio</a></li>
+            <li><a href="#about">Acerca de Nosotros</a></li>
+            <li><a href="#login">Sistema de Login & Registro</a></li>
+            <li><a href="#admin">Panel de Administradores</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Categorías -->
+        <div>
+          <h4 class="footer-col-title">Categorías</h4>
+          <ul class="footer-links-list">
+            <li><a href="#shop" onclick="SynthexAppInstance.setShopFilter('bots')">Bots de Discord / Telegram</a></li>
+            <li><a href="#shop" onclick="SynthexAppInstance.setShopFilter('robotica')">Robótica & Hardware IoT</a></li>
+            <li><a href="#shop" onclick="SynthexAppInstance.setShopFilter('automatizacion')">Automatización RPA Cloud</a></li>
+            <li><a href="#shop" onclick="SynthexAppInstance.setShopFilter('programas')">Software & Dev Tools</a></li>
+            <li><a href="#projects">Firmware Abierto (ROS2/ESP32)</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 4: Redes Sociales & Métodos de Pago -->
+        <div>
+          <h4 class="footer-col-title">Comunidad & Redes</h4>
+          <div class="social-links-grid">
+            <a href="https://discord.gg" target="_blank" class="social-btn discord-btn" title="Únete a nuestro servidor Discord">
+              <span>💬 Discord</span>
+            </a>
+            <a href="https://github.com" target="_blank" class="social-btn github-btn" title="Repositorios en GitHub">
+              <span>🐙 GitHub</span>
+            </a>
+            <a href="https://twitter.com" target="_blank" class="social-btn" title="Síguenos en X / Twitter">
+              <span>𝕏 Twitter / X</span>
+            </a>
+            <a href="https://youtube.com" target="_blank" class="social-btn" title="Canal de YouTube">
+              <span>▶️ YouTube</span>
+            </a>
+            <a href="https://linkedin.com" target="_blank" class="social-btn" title="Perfil LinkedIn">
+              <span>💼 LinkedIn</span>
+            </a>
+            <a href="https://instagram.com" target="_blank" class="social-btn" title="Instagram">
+              <span>📸 Instagram</span>
+            </a>
+          </div>
+
+          <div class="mt-4 pt-4 border-t border-subtle">
+            <h5 class="font-xs text-muted mb-2">PAGOS PROCESADOS POR:</h5>
+            <span class="social-btn stripe-footer-btn">
+              <span>💳 Stripe Payments • Tarjetas & Apple / Google Pay</span>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer Bottom Strip -->
+      <div class="footer-bottom">
+        <div>
+          © 2026 <strong>SYNTHEX</strong>. Desarrollado por <strong>[DEV] BaRLO</strong>, <strong>[DEV] santiagortega</strong> y <strong>_ortizr</strong>.
+        </div>
+        <div class="mono font-xs">
+          Design Architecture: Grid Bento • Type: Syne + Inter + JetBrains Mono
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JAVASCRIPT LOGIC & MODULES -->
+  <script src="js/data.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/stripe-gateway.js"></script>
+  <script src="js/terminal.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

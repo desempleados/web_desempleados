@@ -1,0 +1,14 @@
+# Node & OS Files
+node_modules/
+npm-debug.log
+.DS_Store
+Thumbs.db
+
+# Large ebook binaries (keep repository light)
+guias/
+
+# Temporary / diagnostic scripts
+check_git.js
+get_git.js
+extract_git.ps1
+test_endpoints.js

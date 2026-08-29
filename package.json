@@ -1,0 +1,20 @@
+{
+  "name": "synthex-tech-platform",
+  "version": "1.0.0",
+  "description": "Plataforma web de venta de software, bots, robótica y automatizaciones con consola de administración y pasarela Stripe",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": [
+    "robotics",
+    "bots",
+    "automation",
+    "software-store",
+    "admin-console",
+    "stripe-checkout",
+    "stripe-elements"
+  ],
+  "author": "BaRLO, santiagortega, ortizr",
+  "license": "MIT"
+}
