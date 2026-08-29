@@ -40,8 +40,8 @@ Antes de comenzar, asegúrate de tener instalado en tu computadora:
 ### 1. Clonar el repositorio
 Abre tu terminal o consola y ejecuta:
 ```bash
-git clone https://github.com/tu-usuario/synthex-platform.git
-cd synthex-platform
+git clone https://github.com/desempleados/web_desempleados.git
+cd web_desempleados
 ```
 
 ### 2. Iniciar el servidor local
