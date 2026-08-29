@@ -6,6 +6,9 @@ Thumbs.db
 
 # Large ebook binaries (keep repository light)
 guias/
+*.epub
+*.pdf
+*.mobi
 
 # Temporary / diagnostic scripts
 check_git.js
