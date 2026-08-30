@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="es" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23B8F53A'/%3E%3Ctext x='16' y='23' font-family='monospace' font-size='20' font-weight='bold' text-anchor='middle' fill='%230B0C0E'%3E_%3C/text%3E%3C/svg%3E"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>desempleados.dev — webs, apps y bots a medida</title>
+    <meta
+      name="description"
+      content="Equipo de desarrolladores que construye webs, apps y bots a medida. Sin agencia de por medio: hablas directo con quien escribe el código."
+    />
+    <meta property="og:title" content="desempleados.dev — webs, apps y bots a medida" />
+    <meta
+      property="og:description"
+      content="Un equipo pequeño de desarrolladores sin jefes ni reuniones que sobran. Tu proyecto es nuestra prioridad."
+    />
+    <meta property="og:type" content="website" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <script>
+      // Evita parpadeo de tema: aplica la clase antes del primer paint
+      ;(function () {
+        try {
+          var t = localStorage.getItem('dd-theme')
+          if (t === 'light') document.documentElement.classList.remove('dark')
+        } catch (e) {}
+      })()
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
