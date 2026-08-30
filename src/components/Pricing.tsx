@@ -48,6 +48,11 @@ export function Pricing() {
                           {t.pricing.from}
                         </span>
                         {row.amount.value[lang]}
+                        {row.fine && (
+                          <span className="mt-1.5 block font-mono text-[11px] font-normal text-accent">
+                            {row.fine[lang]}
+                          </span>
+                        )}
                       </>
                     ) : (
                       <span className="font-mono text-base font-normal text-accent">

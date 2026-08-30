@@ -35,6 +35,9 @@ function Email() {
         </p>
       ) : (
         <form onSubmit={onSubmit} className="mt-auto pt-8" noValidate>
+          <p className="mb-3 font-mono text-xs text-muted-foreground" aria-hidden="true">
+            <span className="text-accent">↳</span> {t.community.newsSample}
+          </p>
           <label htmlFor="newsletter-email" className="mb-2 block font-mono text-xs text-muted-foreground">
             {t.community.newsLabel}
           </label>

@@ -3,8 +3,8 @@ import type { Lang } from '@/content/copy'
 type Bi = Record<Lang, string>
 
 /* ------------------------------------------------------------------------ */
-/* Datos estructurados. Montos y enlaces marcados como PROVISIONALES:       */
-/* son los únicos valores inventados a la espera de los reales.             */
+/* Datos estructurados. Montos, métricas y enlaces marcados como            */
+/* PROVISIONALES: son los únicos valores inventados a la espera de reales.  */
 /* ------------------------------------------------------------------------ */
 
 export const DISCORD_URL = 'https://discord.gg/desempleados' // PROVISIONAL
@@ -16,7 +16,8 @@ export interface Service {
   number: string
   title: Bi
   description: Bi
-  includes: Bi[]
+  /** items con tag mono estilo dev ([design], [seo]…) en lugar de checks genéricos */
+  includes: { tag: string; text: Bi }[]
   price: { mode: 'fixed' | 'quote'; amount?: Bi }
 }
 
@@ -30,10 +31,10 @@ export const SERVICES: Service[] = [
       en: 'Landing pages, full websites and web applications built from scratch. Original design, measurable performance and code you will inherit without fear.',
     },
     includes: [
-      { es: 'Diseño propio: nada de plantillas genéricas', en: 'Original design: no generic templates' },
-      { es: 'Responsive de verdad, no “lo revisamos luego”', en: 'Actually responsive, not “we’ll check later”' },
-      { es: 'SEO técnico y rendimiento desde el día uno', en: 'Technical SEO and performance from day one' },
-      { es: 'Te entregamos el repositorio completo', en: 'You get the full repository' },
+      { tag: 'design', text: { es: 'Diseño propio: nada de plantillas genéricas', en: 'Original design: no generic templates' } },
+      { tag: 'ux', text: { es: 'Responsive de verdad, no “lo revisamos luego”', en: 'Actually responsive, not “we’ll check later”' } },
+      { tag: 'seo', text: { es: 'SEO técnico y rendimiento desde el día uno', en: 'Technical SEO and performance from day one' } },
+      { tag: 'repo', text: { es: 'Te entregamos el repositorio completo', en: 'You get the full repository' } },
     ],
     price: {
       mode: 'fixed',
@@ -49,10 +50,10 @@ export const SERVICES: Service[] = [
       en: 'Discord bots your community will actually use, scripts that kill repetitive work, and integrations between tools that do not talk to each other.',
     },
     includes: [
-      { es: 'Bots de Discord: moderación, tickets, economía', en: 'Discord bots: moderation, tickets, economy' },
-      { es: 'Automatizaciones y scrapers a medida', en: 'Custom automations and scrapers' },
-      { es: 'Integraciones con APIs y bases de datos', en: 'API and database integrations' },
-      { es: 'Hosting y mantenimiento opcional', en: 'Optional hosting and maintenance' },
+      { tag: 'discord', text: { es: 'Bots de Discord: moderación, tickets, economía', en: 'Discord bots: moderation, tickets, economy' } },
+      { tag: 'rpa', text: { es: 'Automatizaciones y scrapers a medida', en: 'Custom automations and scrapers' } },
+      { tag: 'api', text: { es: 'Integraciones con APIs y bases de datos', en: 'API and database integrations' } },
+      { tag: 'ops', text: { es: 'Hosting y mantenimiento opcional', en: 'Optional hosting and maintenance' } },
     ],
     price: { mode: 'quote' },
   },
@@ -63,10 +64,13 @@ export interface Project {
   name: string
   tagline: Bi
   stack: string[]
+  /** métricas PROVISIONALES hasta tener repos públicos reales */
+  metrics: Bi
+  /** commits ficticios del log (PROVISIONALES) */
+  commits: string[]
   status: 'live' | 'beta' | 'wip'
   url: string
   featured?: boolean
-  glyph: string
 }
 
 export const PROJECTS: Project[] = [
@@ -78,10 +82,18 @@ export const PROJECTS: Project[] = [
       en: 'A job board for LATAM devs, with filters that understand how people actually look for jobs.',
     },
     stack: ['React', 'Node.js', 'PostgreSQL'],
+    metrics: {
+      es: '130 usuarios · 42 ofertas activas · 99.9% uptime',
+      en: '130 users · 42 active listings · 99.9% uptime',
+    },
+    commits: [
+      'feat: filtro de salario real (no “a convenir”)',
+      'fix: zona horaria en ofertas remotas',
+      'chore: migración a drizzle ORM',
+    ],
     status: 'beta',
     url: GITHUB_URL, // PROVISIONAL
     featured: true,
-    glyph: '▣',
   },
   {
     id: 'pingui-bot',
@@ -91,9 +103,17 @@ export const PROJECTS: Project[] = [
       en: 'Moderation bot with levels and Spanish-language commands for Discord communities.',
     },
     stack: ['Discord.js', 'Redis'],
+    metrics: {
+      es: '8 servidores · 3.1k miembros moderados',
+      en: '8 servers · 3.1k members moderated',
+    },
+    commits: [
+      'feat: sistema de niveles con anti-farm',
+      'fix: rate limit en /limpiar',
+      'perf: cache de permisos en redis',
+    ],
     status: 'live',
     url: GITHUB_URL, // PROVISIONAL
-    glyph: '❄',
   },
   {
     id: 'factura-feliz',
@@ -103,9 +123,17 @@ export const PROJECTS: Project[] = [
       en: 'PDF invoice generator for freelancers who just want to get paid already.',
     },
     stack: ['TypeScript', 'pdf-lib'],
+    metrics: {
+      es: '214 facturas generadas · 0 contadores heridos',
+      en: '214 invoices generated · 0 accountants harmed',
+    },
+    commits: [
+      'feat: plantilla con tu logo',
+      'fix: redondeo de IVA (lo siento, hacienda)',
+      'chore: exports en JSON',
+    ],
     status: 'live',
     url: GITHUB_URL, // PROVISIONAL
-    glyph: '▦',
   },
   {
     id: 'stack-cv',
@@ -115,9 +143,16 @@ export const PROJECTS: Project[] = [
       en: 'CVs for devs in a format recruiters actually read.',
     },
     stack: ['React', 'Tailwind'],
+    metrics: {
+      es: 'en construcción · ETA: cuando compile',
+      en: 'under construction · ETA: whenever it compiles',
+    },
+    commits: [
+      'feat: parser de JSON a CV',
+      'wip: modo ATS-friendly',
+    ],
     status: 'wip',
     url: GITHUB_URL, // PROVISIONAL
-    glyph: '▤',
   },
 ]
 
@@ -126,6 +161,8 @@ export interface PriceRow {
   name: string
   description: Bi
   amount: { mode: 'fixed' | 'quote'; value?: Bi }
+  /** nota fina bajo el precio (ej: por qué ese precio es posible) */
+  fine?: Bi
 }
 
 export const PRICE_ROWS: PriceRow[] = [
@@ -151,10 +188,14 @@ export const PRICE_ROWS: PriceRow[] = [
     id: 'bot-discord',
     name: 'Bot de Discord',
     description: {
-      es: 'Moderación, economía, tickets o lo que tu comunidad necesite.',
-      en: 'Moderation, economy, tickets or whatever your community needs.',
+      es: 'Moderación, economía, tickets o lo que tu comunidad necesite. Comandos, hosting del bot y ajustes posteriores incluidos el primer mes.',
+      en: 'Moderation, economy, tickets or whatever your community needs. Commands, bot hosting and follow-up tweaks included the first month.',
     },
     amount: { mode: 'fixed', value: { es: 'US$80', en: 'US$80' } },
+    fine: {
+      es: 'sin oficina · sin comercial · sin nóminas: por eso este precio',
+      en: 'no office · no salespeople · no payroll: hence this price',
+    },
   },
   {
     id: 'automatizacion',
@@ -167,7 +208,8 @@ export const PRICE_ROWS: PriceRow[] = [
   },
 ]
 
-export const STACK = [
+/** El marquee mezcla tecnologías reales con estados del equipo. */
+export const STACK_TECH = [
   'TypeScript',
   'React',
   'Node.js',
@@ -176,7 +218,11 @@ export const STACK = [
   'Tailwind CSS',
   'Discord.js',
   'Vite',
-  'Git',
-  'Linux',
-  'REST APIs',
+]
+
+export const STACK_STATES: Bi[] = [
+  { es: 'disponibilidad: inmediata', en: 'availability: immediate' },
+  { es: 'reuniones evitadas hoy: 7', en: 'meetings dodged today: 7' },
+  { es: 'uptime RRHH: 0%', en: 'HR uptime: 0%' },
+  { es: 'café en sangre: 96%', en: 'blood type: coffee, 96%' },
 ]

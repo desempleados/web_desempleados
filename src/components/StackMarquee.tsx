@@ -1,18 +1,25 @@
-import { STACK } from '@/content/data'
+import { STACK_STATES, STACK_TECH } from '@/content/data'
 import { useI18n } from '@/i18n'
 
 export function StackMarquee() {
-  const { t } = useI18n()
+  const { t, lang } = useI18n()
 
-  const items = (
+  // Intercala tecnologías (texto) y estados del equipo (acento, mono con humor)
+  const items: { kind: 'tech' | 'state'; text: string }[] = [
+    ...STACK_TECH.map((tech) => ({ kind: 'tech' as const, text: tech })),
+    ...STACK_STATES.map((s) => ({ kind: 'state' as const, text: s[lang] })),
+  ]
+
+  const row = (
     <>
-      {STACK.map((tech) => (
-        <span
-          key={tech}
-          className="inline-flex items-center gap-6 font-mono text-sm text-muted-foreground"
-        >
-          {tech}
-          <span aria-hidden="true" className="text-accent">
+      {items.map((item, i) => (
+        <span key={`${item.kind}-${i}`} className="inline-flex items-center gap-6">
+          {item.kind === 'state' ? (
+            <span className="font-mono text-sm text-accent">{item.text}</span>
+          ) : (
+            <span className="font-mono text-sm text-muted-foreground">{item.text}</span>
+          )}
+          <span aria-hidden="true" className="font-mono text-sm text-muted-foreground/50">
             //
           </span>
         </span>
@@ -24,9 +31,9 @@ export function StackMarquee() {
     <section aria-label={t.stack.label} className="border-y border-border py-5">
       <div className="dd-marquee-mask overflow-hidden">
         <div className="dd-marquee-track flex w-max items-center gap-6">
-          <div className="flex items-center gap-6">{items}</div>
+          <div className="flex items-center gap-6">{row}</div>
           <div className="flex items-center gap-6" aria-hidden="true">
-            {items}
+            {row}
           </div>
         </div>
       </div>

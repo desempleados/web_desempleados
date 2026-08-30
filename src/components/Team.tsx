@@ -1,4 +1,5 @@
 import { SectionHeading } from '@/components/SectionHeading'
+import { GITHUB_URL } from '@/content/data'
 import { useI18n } from '@/i18n'
 
 /**
@@ -44,6 +45,18 @@ export function Team() {
             </li>
           ))}
         </ul>
+
+        <p className="mt-8 border-t border-border pt-6 font-mono text-sm text-muted-foreground">
+          <span className="text-accent">$</span> {t.team.verifyLabel}{' '}
+          <a
+            href={GITHUB_URL}
+            target="_blank"
+            rel="noreferrer"
+            className="text-accent underline-offset-4 hover:underline"
+          >
+            {t.team.verifyLink}
+          </a>
+        </p>
       </div>
     </section>
   )

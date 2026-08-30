@@ -1,5 +1,3 @@
-import { Plus } from 'lucide-react'
-
 import { buttonVariants } from '@/components/ui/button'
 import { SectionHeading } from '@/components/SectionHeading'
 import { SERVICES, EMAIL } from '@/content/data'
@@ -19,16 +17,17 @@ export function Services() {
           lead={t.services.lead}
         />
 
-        {/* Asimetría intencional: 7/5 columnas, superficies distintas */}
+        {/* Tratamientos distintos por panel: nada de cards gemelas.
+            Webs = ventana destacada con borde lima. Bots = panel de log. */}
         <div className="mt-14 grid gap-5 lg:grid-cols-12">
           {SERVICES.map((s, i) => (
             <article
               key={s.id}
               className={cn(
-                'flex flex-col rounded-card border border-border p-7 md:p-9',
+                'flex flex-col rounded-card border p-7 md:p-9',
                 i === 0
-                  ? 'bg-surface lg:col-span-7'
-                  : 'bg-transparent lg:col-span-5 lg:border-dashed'
+                  ? 'border-l-2 border-l-accent border-border bg-surface lg:col-span-7'
+                  : 'border-border bg-muted lg:col-span-5'
               )}
             >
               <div className="flex items-baseline justify-between gap-4">
@@ -51,10 +50,15 @@ export function Services() {
               <p className="mt-4 text-muted-foreground">{s.description[lang]}</p>
 
               <ul className="mt-7 space-y-3 border-t border-border pt-7">
-                {s.includes.map((item, j) => (
-                  <li key={j} className="flex items-start gap-3 text-sm">
-                    <Plus aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-accent" />
-                    <span>{item[lang]}</span>
+                {s.includes.map((item) => (
+                  <li key={item.tag} className="flex items-start gap-3 text-sm">
+                    <span
+                      className="mt-0.5 shrink-0 rounded-[3px] bg-background px-1.5 py-0.5 font-mono text-[11px] text-accent"
+                      aria-hidden="true"
+                    >
+                      [{item.tag}]
+                    </span>
+                    <span>{item.text[lang]}</span>
                   </li>
                 ))}
               </ul>
