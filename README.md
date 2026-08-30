@@ -5,7 +5,7 @@
 ![Stripe](https://img.shields.io/badge/Payments-Stripe-635BFF.svg)
 ![Status](https://img.shields.io/badge/Status-Production%20Ready-00F0FF.svg)
 
-Plataforma web integral de arquitectura **SPA (Single Page Application)** diseñada para la exhibición, venta y administración de **software, bots de mensajería/trading, herramientas RPA y firmwares de robótica (ROS2/ESP32)**, con pasarela de cobro **Stripe** y panel de administración con **consola terminal CLI interactiva**.
+Plataforma web integral de arquitectura **SPA (Single Page Application)** diseñada para la exhibición, venta y administración de **software, bots de mensajería/trading, herramientas RPA y firmwares de robótica (ROS2/ESP32)**, con pasarela de cobro **Stripe** y panel de administración con **consola terminal CLI interactiva.**.
 
 ---
 
