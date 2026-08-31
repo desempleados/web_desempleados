@@ -3,226 +3,202 @@ import type { Lang } from '@/content/copy'
 type Bi = Record<Lang, string>
 
 /* ------------------------------------------------------------------------ */
-/* Datos estructurados. Montos, métricas y enlaces marcados como            */
-/* PROVISIONALES: son los únicos valores inventados a la espera de reales.  */
+/* PROVISIONAL: montos, métricas, commits, fotos y URLs son de relleno      */
+/* plausible mientras llegan los reales. Busca la marca PROVISIONAL.        */
 /* ------------------------------------------------------------------------ */
 
 export const DISCORD_URL = 'https://discord.gg/desempleados' // PROVISIONAL
 export const GITHUB_URL = 'https://github.com/desempleados-dev' // PROVISIONAL
 export const EMAIL = 'hola@desempleados.dev' // PROVISIONAL
-
-export interface Service {
-  id: string
-  number: string
-  title: Bi
-  description: Bi
-  /** items con tag mono estilo dev ([design], [seo]…) en lugar de checks genéricos */
-  includes: { tag: string; text: Bi }[]
-  price: { mode: 'fixed' | 'quote'; amount?: Bi }
+export const SOCIALS = {
+  x: 'https://x.com/desempleadosdev', // PROVISIONAL
+  youtube: 'https://youtube.com/@desempleadosdev', // PROVISIONAL
+  instagram: 'https://instagram.com/desempleadosdev', // PROVISIONAL
+  linkedin: 'https://linkedin.com/company/desempleadosdev', // PROVISIONAL
 }
 
-export const SERVICES: Service[] = [
+/** Cuentas con acceso al panel (PROVISIONAL: muévelo a publicMetadata de Clerk). */
+export const ADMIN_EMAILS = ['admin@synthex.dev', 'ortegaplatasantiago@gmail.com']
+
+/* ------------------------------- Productos ------------------------------- */
+
+export interface Product {
+  id: string
+  name: Bi
+  price: { mode: 'fixed' | 'quote'; value?: number; monthly?: boolean }
+  bullets: Bi[]
+}
+
+export const PRODUCTS: Product[] = [
   {
-    id: 'webs-apps',
-    number: '01',
-    title: { es: 'Webs y apps a medida', en: 'Custom websites and apps' },
-    description: {
-      es: 'Landing pages, sitios completos y aplicaciones web construidas desde cero. Diseño propio, rendimiento medible y código que heredarás sin miedo.',
-      en: 'Landing pages, full websites and web applications built from scratch. Original design, measurable performance and code you will inherit without fear.',
-    },
-    includes: [
-      { tag: 'design', text: { es: 'Diseño propio: nada de plantillas genéricas', en: 'Original design: no generic templates' } },
-      { tag: 'ux', text: { es: 'Responsive de verdad, no “lo revisamos luego”', en: 'Actually responsive, not “we’ll check later”' } },
-      { tag: 'seo', text: { es: 'SEO técnico y rendimiento desde el día uno', en: 'Technical SEO and performance from day one' } },
-      { tag: 'repo', text: { es: 'Te entregamos el repositorio completo', en: 'You get the full repository' } },
+    id: 'landing',
+    name: { es: 'Landing page', en: 'Landing page' },
+    price: { mode: 'fixed', value: 120 },
+    bullets: [
+      { es: 'Diseño propio, responsive', en: 'Original design, responsive' },
+      { es: 'SEO básico y deploy incluido', en: 'Basic SEO, deploy included' },
+      { es: 'Entrega: 5–10 días', en: 'Delivery: 5–10 days' },
     ],
-    price: {
-      mode: 'fixed',
-      amount: { es: 'desde US$120', en: 'from US$120' },
-    },
   },
   {
-    id: 'bots-automatizacion',
-    number: '02',
-    title: { es: 'Bots y automatización', en: 'Bots and automation' },
-    description: {
-      es: 'Bots de Discord que tu comunidad querrá usar, scripts que eliminan trabajo repetitivo e integraciones entre herramientas que no se hablan entre sí.',
-      en: 'Discord bots your community will actually use, scripts that kill repetitive work, and integrations between tools that do not talk to each other.',
-    },
-    includes: [
-      { tag: 'discord', text: { es: 'Bots de Discord: moderación, tickets, economía', en: 'Discord bots: moderation, tickets, economy' } },
-      { tag: 'rpa', text: { es: 'Automatizaciones y scrapers a medida', en: 'Custom automations and scrapers' } },
-      { tag: 'api', text: { es: 'Integraciones con APIs y bases de datos', en: 'API and database integrations' } },
-      { tag: 'ops', text: { es: 'Hosting y mantenimiento opcional', en: 'Optional hosting and maintenance' } },
+    id: 'web-app',
+    name: { es: 'Web completa / app', en: 'Full website / app' },
+    price: { mode: 'fixed', value: 350 },
+    bullets: [
+      { es: 'Múltiples secciones o panel', en: 'Multiple sections or panel' },
+      { es: 'Lógica a medida', en: 'Custom logic' },
+      { es: 'Entrega: 2–4 semanas', en: 'Delivery: 2–4 weeks' },
     ],
+  },
+  {
+    id: 'bot-discord',
+    name: { es: 'Bot de Discord', en: 'Discord bot' },
+    price: { mode: 'fixed', value: 80 },
+    bullets: [
+      { es: 'Moderación, tickets o economía', en: 'Moderation, tickets or economy' },
+      { es: 'Hosting el primer mes incluido', en: 'First month hosting included' },
+      { es: 'Entrega: 1–2 semanas', en: 'Delivery: 1–2 weeks' },
+    ],
+  },
+  {
+    id: 'mantenimiento',
+    name: { es: 'Mantenimiento', en: 'Maintenance' },
+    price: { mode: 'fixed', value: 30, monthly: true },
+    bullets: [
+      { es: 'Cambios y soporte mensual', en: 'Monthly changes and support' },
+      { es: 'Cancela cuando quieras', en: 'Cancel anytime' },
+      { es: 'Respuesta en 24h', en: '24h response time' },
+    ],
+  },
+  {
+    id: 'automatizacion',
+    name: { es: 'Automatización / scripts', en: 'Automation / scripts' },
     price: { mode: 'quote' },
+    bullets: [
+      { es: 'Elimina el trabajo manual', en: 'Kill manual work' },
+      { es: 'Integra tus herramientas', en: 'Make your tools talk' },
+      { es: 'Cotización según alcance', en: 'Quoted per scope' },
+    ],
   },
 ]
+
+/* ------------------------------- Proyectos ------------------------------- */
+
+export type ShotKind = 'board' | 'chat' | 'invoice' | 'cv'
 
 export interface Project {
   id: string
   name: string
+  shot: ShotKind
   tagline: Bi
   stack: string[]
-  /** métricas PROVISIONALES hasta tener repos públicos reales */
   metrics: Bi
-  /** commits ficticios del log (PROVISIONALES) */
   commits: string[]
   status: 'live' | 'beta' | 'wip'
   url: string
-  featured?: boolean
 }
 
 export const PROJECTS: Project[] = [
   {
     id: 'chambea-board',
     name: 'chambea-board',
+    shot: 'board',
     tagline: {
-      es: 'Tablero de ofertas de trabajo para devs de LATAM, con filtros que entienden cómo se busca trabajo de verdad.',
-      en: 'A job board for LATAM devs, with filters that understand how people actually look for jobs.',
+      es: 'Ofertas de trabajo para devs de LATAM con filtros que entienden cómo se busca trabajo de verdad.',
+      en: 'Job listings for LATAM devs with filters that understand how people actually job-hunt.',
     },
     stack: ['React', 'Node.js', 'PostgreSQL'],
-    metrics: {
-      es: '130 usuarios · 42 ofertas activas · 99.9% uptime',
-      en: '130 users · 42 active listings · 99.9% uptime',
-    },
-    commits: [
-      'feat: filtro de salario real (no “a convenir”)',
-      'fix: zona horaria en ofertas remotas',
-      'chore: migración a drizzle ORM',
-    ],
+    metrics: { es: '130 usuarios · 42 ofertas activas', en: '130 users · 42 active listings' },
+    commits: ['feat: filtro de salario real', 'fix: zona horaria en remotas', 'chore: drizzle ORM'],
     status: 'beta',
     url: GITHUB_URL, // PROVISIONAL
-    featured: true,
   },
   {
     id: 'pingui-bot',
     name: 'pingui-bot',
+    shot: 'chat',
     tagline: {
       es: 'Bot de moderación con niveles y comandos en español para comunidades de Discord.',
-      en: 'Moderation bot with levels and Spanish-language commands for Discord communities.',
+      en: 'Moderation bot with levels and Spanish commands for Discord communities.',
     },
     stack: ['Discord.js', 'Redis'],
-    metrics: {
-      es: '8 servidores · 3.1k miembros moderados',
-      en: '8 servers · 3.1k members moderated',
-    },
-    commits: [
-      'feat: sistema de niveles con anti-farm',
-      'fix: rate limit en /limpiar',
-      'perf: cache de permisos en redis',
-    ],
+    metrics: { es: '8 servidores · 3.1k miembros', en: '8 servers · 3.1k members' },
+    commits: ['feat: niveles anti-farm', 'fix: rate limit /limpiar', 'perf: cache redis'],
     status: 'live',
     url: GITHUB_URL, // PROVISIONAL
   },
   {
     id: 'factura-feliz',
     name: 'factura-feliz',
+    shot: 'invoice',
     tagline: {
-      es: 'Generador de facturas PDF para freelancers que solo quieren cobrar y ya.',
-      en: 'PDF invoice generator for freelancers who just want to get paid already.',
+      es: 'Facturas PDF para freelancers que solo quieren cobrar y ya.',
+      en: 'PDF invoices for freelancers who just want to get paid.',
     },
     stack: ['TypeScript', 'pdf-lib'],
-    metrics: {
-      es: '214 facturas generadas · 0 contadores heridos',
-      en: '214 invoices generated · 0 accountants harmed',
-    },
-    commits: [
-      'feat: plantilla con tu logo',
-      'fix: redondeo de IVA (lo siento, hacienda)',
-      'chore: exports en JSON',
-    ],
+    metrics: { es: '214 facturas generadas', en: '214 invoices generated' },
+    commits: ['feat: plantilla con logo', 'fix: redondeo de IVA', 'chore: export JSON'],
     status: 'live',
     url: GITHUB_URL, // PROVISIONAL
   },
   {
     id: 'stack-cv',
     name: 'stack-cv',
+    shot: 'cv',
     tagline: {
       es: 'CVs para devs en un formato que los reclutadores sí leen.',
       en: 'CVs for devs in a format recruiters actually read.',
     },
     stack: ['React', 'Tailwind'],
-    metrics: {
-      es: 'en construcción · ETA: cuando compile',
-      en: 'under construction · ETA: whenever it compiles',
-    },
-    commits: [
-      'feat: parser de JSON a CV',
-      'wip: modo ATS-friendly',
-    ],
+    metrics: { es: 'en construcción', en: 'under construction' },
+    commits: ['feat: parser JSON a CV', 'wip: modo ATS'],
     status: 'wip',
     url: GITHUB_URL, // PROVISIONAL
   },
 ]
 
-export interface PriceRow {
+/* --------------------------------- Equipo -------------------------------- */
+/* Nombres y roles reales (del sitio anterior). Fotos: drop your files in   */
+/* src/assets/team/ and import them here. GitHub: PROVISIONAL.              */
+
+export interface Member {
   id: string
   name: string
-  description: Bi
-  amount: { mode: 'fixed' | 'quote'; value?: Bi }
-  /** nota fina bajo el precio (ej: por qué ese precio es posible) */
-  fine?: Bi
+  role: Bi
+  bio: Bi
+  github: string
+  photo?: string
 }
 
-export const PRICE_ROWS: PriceRow[] = [
+export const TEAM: Member[] = [
   {
-    id: 'landing',
-    name: 'Landing page',
-    description: {
-      es: 'Una página, diseño propio, responsive, SEO básico y deploy incluido.',
-      en: 'One page, original design, responsive, basic SEO and deploy included.',
+    id: 'barlo',
+    name: 'BaRLO',
+    role: { es: 'Backend & robótica', en: 'Backend & robotics' },
+    bio: {
+      es: 'Sistemas embebidos, APIs y bases de datos. Lo que se cae, lo levanta; lo que funciona, es suyo.',
+      en: 'Embedded systems, APIs and databases. If it goes down he fixes it; if it works, it is his.',
     },
-    amount: { mode: 'fixed', value: { es: 'US$120', en: 'US$120' } },
+    github: GITHUB_URL, // PROVISIONAL
   },
   {
-    id: 'web-app',
-    name: 'Web completa / app',
-    description: {
-      es: 'Múltiples secciones, panel de contenido o lógica a medida.',
-      en: 'Multiple sections, a content panel or custom logic.',
+    id: 'santiago',
+    name: 'Santiago Ortega',
+    role: { es: 'IA & automatización', en: 'AI & automation' },
+    bio: {
+      es: 'Bots, RPA y agentes autónomos. Escribe los pipelines que ahorran horas de trabajo aburrido.',
+      en: 'Bots, RPA and autonomous agents. Writes the pipelines that save hours of boring work.',
     },
-    amount: { mode: 'fixed', value: { es: 'US$350', en: 'US$350' } },
+    github: GITHUB_URL, // PROVISIONAL
   },
   {
-    id: 'bot-discord',
-    name: 'Bot de Discord',
-    description: {
-      es: 'Moderación, economía, tickets o lo que tu comunidad necesite. Comandos, hosting del bot y ajustes posteriores incluidos el primer mes.',
-      en: 'Moderation, economy, tickets or whatever your community needs. Commands, bot hosting and follow-up tweaks included the first month.',
+    id: 'ortiz',
+    name: 'Ortiz R.',
+    role: { es: 'Frontend & pagos', en: 'Frontend & payments' },
+    bio: {
+      es: 'Interfaces precisas y arquitectura de pagos. Diseña lo que ves y cobra a tiempo.',
+      en: 'Precise interfaces and payment architecture. Designs what you see and invoices on time.',
     },
-    amount: { mode: 'fixed', value: { es: 'US$80', en: 'US$80' } },
-    fine: {
-      es: 'sin oficina · sin comercial · sin nóminas: por eso este precio',
-      en: 'no office · no salespeople · no payroll: hence this price',
-    },
+    github: GITHUB_URL, // PROVISIONAL
   },
-  {
-    id: 'automatizacion',
-    name: 'Automatización / scripts',
-    description: {
-      es: 'Elimina trabajo manual, integra tus herramientas entre sí.',
-      en: 'Kill manual work, make your tools talk to each other.',
-    },
-    amount: { mode: 'quote' },
-  },
-]
-
-/** El marquee mezcla tecnologías reales con estados del equipo. */
-export const STACK_TECH = [
-  'TypeScript',
-  'React',
-  'Node.js',
-  'Python',
-  'PostgreSQL',
-  'Tailwind CSS',
-  'Discord.js',
-  'Vite',
-]
-
-export const STACK_STATES: Bi[] = [
-  { es: 'disponibilidad: inmediata', en: 'availability: immediate' },
-  { es: 'reuniones evitadas hoy: 7', en: 'meetings dodged today: 7' },
-  { es: 'uptime RRHH: 0%', en: 'HR uptime: 0%' },
-  { es: 'café en sangre: 96%', en: 'blood type: coffee, 96%' },
 ]
