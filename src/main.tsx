@@ -11,18 +11,10 @@ if (!PUBLISHABLE_KEY) {
   throw new Error('Falta VITE_CLERK_PUBLISHABLE_KEY en .env.local')
 }
 
-// En producción, clerk-js se sirve por el proxy de la integración Vercel↔Clerk
-// (la ruta /__clerk/ de nuestro propio dominio) en vez del subdominio clerk.*,
-// que puede no estar aprovisionado. En desarrollo usa el comportamiento normal.
-const CLERK_JS_URL = import.meta.env.PROD
-  ? '/__clerk/npm/@clerk/clerk-js@6/dist/clerk.browser.js'
-  : undefined
-
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <ClerkProvider
       publishableKey={PUBLISHABLE_KEY}
-      clerkJSUrl={CLERK_JS_URL}
       appearance={{
         variables: {
           colorPrimary: '#38d5f2',
