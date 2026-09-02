@@ -6,6 +6,7 @@ import { Button, buttonVariants } from '@/components/ui/button'
 import { SectionHeading } from '@/components/SectionHeading'
 import { DISCORD_URL, PRODUCTS } from '@/content/data'
 import { useI18n } from '@/i18n'
+import { formatPrice } from '@/lib/utils'
 import {
   addToCart,
   cartDetailed,
@@ -14,11 +15,6 @@ import {
   placeOrder,
   removeFromCart,
 } from '@/lib/store'
-
-function priceLabel(price: { mode: 'fixed' | 'quote'; value?: number; monthly?: boolean }, t: ReturnType<typeof useI18n>['t']) {
-  if (price.mode === 'quote') return t.store.quote
-  return `US$${price.value}${price.monthly ? t.store.monthly : ''}`
-}
 
 export function Store() {
   const { t, lang } = useI18n()
@@ -64,7 +60,9 @@ export function Store() {
                 <article key={p.id} className="flex flex-col rounded-card border border-border bg-surface p-6">
                   <div className="flex items-baseline justify-between gap-3">
                     <h3 className="font-display text-lg font-bold tracking-tight">{p.name[lang]}</h3>
-                    <span className="shrink-0 font-mono text-sm font-bold text-accent">{priceLabel(p.price, t)}</span>
+                    <span className="shrink-0 font-mono text-sm font-bold text-accent">
+                      {formatPrice(p.price, t.store.quote, t.store.monthly)}
+                    </span>
                   </div>
                   <ul className="mt-4 space-y-1.5 text-sm text-muted-foreground">
                     {p.bullets.map((b, i) => (
@@ -72,7 +70,7 @@ export function Store() {
                     ))}
                   </ul>
                   <div className="mt-auto pt-5">
-                    {p.price.mode === 'fixed' ? (
+                    {p.price.mode !== 'quote' ? (
                       <Button size="sm" variant={inCart ? 'outline' : 'default'} onClick={() => (inCart ? removeFromCart(p.id) : addToCart(p.id))}>
                         {inCart ? <Trash2 aria-hidden="true" /> : <Plus aria-hidden="true" />}
                         {inCart ? t.store.added : t.store.add}

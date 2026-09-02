@@ -8,7 +8,7 @@ import { SectionHeading } from '@/components/SectionHeading'
 import { DiscordIcon, GithubIcon } from '@/components/Footer'
 import { DISCORD_URL, GITHUB_URL, PRODUCTS } from '@/content/data'
 import { useI18n } from '@/i18n'
-import { cn } from '@/lib/utils'
+import { cn, formatPrice } from '@/lib/utils'
 
 function Hero() {
   const { t } = useI18n()
@@ -37,38 +37,14 @@ function Hero() {
   )
 }
 
-function Specialties() {
-  const { t } = useI18n()
-  return (
-    <section aria-labelledby="especialidad-title" className="border-b border-border px-4 py-8 md:px-6">
-      <div className="mx-auto max-w-6xl">
-        <p id="especialidad-title" className="font-mono text-xs text-muted-foreground">
-          {t.home.specialtyLabel}
-        </p>
-        <ul className="mt-4 flex flex-wrap gap-2">
-          {t.home.specialtyPlaceholders.map((s) => (
-            <li
-              key={s}
-              className="rounded-chip border border-dashed border-input px-3 py-1.5 font-mono text-xs text-muted-foreground"
-            >
-              {s}
-            </li>
-          ))}
-        </ul>
-      </div>
-    </section>
-  )
-}
-
 function Services() {
   const { t, lang } = useI18n()
-  const featured = PRODUCTS.slice(0, 2)
   return (
     <section id="servicios" aria-labelledby="servicios-title" className="px-4 py-20 md:px-6 md:py-28">
       <div className="mx-auto max-w-6xl">
         <SectionHeading id="servicios-title" label={t.home.servicesLabel} title={t.home.servicesTitle} />
         <div className="mt-10 grid gap-4 md:grid-cols-2">
-          {featured.map((p) => (
+          {PRODUCTS.map((p) => (
             <Link
               key={p.id}
               to="/tienda"
@@ -76,9 +52,7 @@ function Services() {
             >
               <div className="flex items-baseline justify-between gap-4">
                 <h3 className="font-display text-xl font-bold tracking-tight">{p.name[lang]}</h3>
-                <span className="font-mono text-sm text-accent">
-                  {p.price.mode === 'fixed' ? `US$${p.price.value}` : t.store.quote}
-                </span>
+                <span className="font-mono text-sm text-accent">{formatPrice(p.price, t.store.quote, t.store.monthly)}</span>
               </div>
               <p className="mt-3 line-clamp-2 text-sm text-muted-foreground">{p.bullets.map((b) => b[lang]).join(' · ')}</p>
               <span className="mt-5 inline-flex items-center gap-1.5 font-mono text-sm text-accent">
@@ -182,7 +156,6 @@ export function Home() {
   return (
     <>
       <Hero />
-      <Specialties />
       <Services />
       <Why />
       <Faq />

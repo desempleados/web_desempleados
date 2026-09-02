@@ -26,7 +26,7 @@ const es = {
   },
   home: {
     servicesLabel: '~/servicios',
-    servicesTitle: 'Dos cosas, hechas bien',
+    servicesTitle: 'Cuatro cosas, hechas bien',
     servicesMore: 'Ver la tienda',
     whyLabel: '~/por-qué-nosotros',
     whyTitle: 'Por qué nosotros',
@@ -68,8 +68,6 @@ const es = {
     discordNote: 'Avances, dudas y demos en vivo.',
     githubCta: 'Ver el código',
     githubNote: 'Todo nuestro trabajo, en repositorios abiertos.',
-    specialtyLabel: '~/especialidad (en definición)',
-    specialtyPlaceholders: ['Especialidad A', 'Especialidad B', 'Especialidad C'],
   },
   projectsPage: {
     label: '~/proyectos',
@@ -178,7 +176,7 @@ const en: Dict = {
   },
   home: {
     servicesLabel: '~/services',
-    servicesTitle: 'Two things, done well',
+    servicesTitle: 'Four things, done well',
     servicesMore: 'Visit the store',
     whyLabel: '~/why-us',
     whyTitle: 'Why us',
@@ -220,8 +218,6 @@ const en: Dict = {
     discordNote: 'Progress, questions and live demos.',
     githubCta: 'Read the code',
     githubNote: 'All our work, in open repositories.',
-    specialtyLabel: '~/specialty (TBD)',
-    specialtyPlaceholders: ['Specialty A', 'Specialty B', 'Specialty C'],
   },
   projectsPage: {
     label: '~/projects',

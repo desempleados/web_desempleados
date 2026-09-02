@@ -25,59 +25,49 @@ export const ADMIN_EMAILS = ['admin@synthex.dev', 'ortegaplatasantiago@gmail.com
 export interface Product {
   id: string
   name: Bi
-  price: { mode: 'fixed' | 'quote'; value?: number; monthly?: boolean }
+  price: { mode: 'fixed' | 'range' | 'quote'; value?: number; min?: number; max?: number; monthly?: boolean }
   bullets: Bi[]
 }
 
 export const PRODUCTS: Product[] = [
   {
     id: 'landing',
-    name: { es: 'Landing page', en: 'Landing page' },
-    price: { mode: 'fixed', value: 120 },
+    name: { es: 'Landing Page', en: 'Landing Page' },
+    price: { mode: 'range', min: 15, max: 30 },
     bullets: [
-      { es: 'Diseño propio, responsive', en: 'Original design, responsive' },
-      { es: 'SEO básico y deploy incluido', en: 'Basic SEO, deploy included' },
+      { es: 'Sitio de una sola página, diseño a medida', en: 'One-page site, custom design' },
+      { es: 'Responsive y con formulario de contacto', en: 'Responsive, with contact form' },
       { es: 'Entrega: 5–10 días', en: 'Delivery: 5–10 days' },
     ],
   },
   {
     id: 'web-app',
-    name: { es: 'Web completa / app', en: 'Full website / app' },
-    price: { mode: 'fixed', value: 350 },
+    name: { es: 'Web o App a Medida', en: 'Custom Website or App' },
+    price: { mode: 'range', min: 40, max: 100 },
     bullets: [
-      { es: 'Múltiples secciones o panel', en: 'Multiple sections or panel' },
-      { es: 'Lógica a medida', en: 'Custom logic' },
-      { es: 'Entrega: 2–4 semanas', en: 'Delivery: 2–4 weeks' },
+      { es: 'Sitio web, plataforma o app móvil completa', en: 'Full website, platform or mobile app' },
+      { es: 'Diseño, desarrollo y despliegue incluidos', en: 'Design, development and deployment included' },
+      { es: 'Alcance mayor: cotización aparte', en: 'Larger scope: quoted separately' },
     ],
   },
   {
-    id: 'bot-discord',
-    name: { es: 'Bot de Discord', en: 'Discord bot' },
-    price: { mode: 'fixed', value: 80 },
+    id: 'bots-automatizaciones',
+    name: { es: 'Bots & Automatizaciones', en: 'Bots & Automations' },
+    price: { mode: 'range', min: 10, max: 25 },
     bullets: [
-      { es: 'Moderación, tickets o economía', en: 'Moderation, tickets or economy' },
-      { es: 'Hosting el primer mes incluido', en: 'First month hosting included' },
-      { es: 'Entrega: 1–2 semanas', en: 'Delivery: 1–2 weeks' },
+      { es: 'Discord, Telegram, WhatsApp o Slack', en: 'Discord, Telegram, WhatsApp or Slack' },
+      { es: 'Scraping, reportes automáticos y más', en: 'Scraping, automated reports and more' },
+      { es: 'Automatizaciones complejas: a cotizar', en: 'Complex automations: quoted' },
     ],
   },
   {
     id: 'mantenimiento',
-    name: { es: 'Mantenimiento', en: 'Maintenance' },
-    price: { mode: 'fixed', value: 30, monthly: true },
+    name: { es: 'Mantenimiento Mensual', en: 'Monthly Maintenance' },
+    price: { mode: 'range', min: 5, max: 15, monthly: true },
     bullets: [
-      { es: 'Cambios y soporte mensual', en: 'Monthly changes and support' },
+      { es: 'Soporte y ajustes continuos', en: 'Ongoing support and tweaks' },
+      { es: 'Para un proyecto ya entregado', en: 'For an already-delivered project' },
       { es: 'Cancela cuando quieras', en: 'Cancel anytime' },
-      { es: 'Respuesta en 24h', en: '24h response time' },
-    ],
-  },
-  {
-    id: 'automatizacion',
-    name: { es: 'Automatización / scripts', en: 'Automation / scripts' },
-    price: { mode: 'quote' },
-    bullets: [
-      { es: 'Elimina el trabajo manual', en: 'Kill manual work' },
-      { es: 'Integra tus herramientas', en: 'Make your tools talk' },
-      { es: 'Cotización según alcance', en: 'Quoted per scope' },
     ],
   },
 ]

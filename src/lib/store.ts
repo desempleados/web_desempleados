@@ -57,8 +57,9 @@ export function cartDetailed(cart: CartItem[], products: Product[]) {
   return cart
     .map((i) => {
       const p = products.find((pr) => pr.id === i.productId)
-      if (!p || p.price.mode !== 'fixed' || !p.price.value) return null
-      return { product: p, qty: i.qty, amount: p.price.value * i.qty }
+      const base = p?.price.mode === 'fixed' ? p.price.value : p?.price.mode === 'range' ? p.price.min : undefined
+      if (!p || base === undefined) return null
+      return { product: p, qty: i.qty, amount: base * i.qty }
     })
     .filter((x): x is { product: Product; qty: number; amount: number } => x !== null)
 }
