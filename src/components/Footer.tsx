@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { ArrowRight, Mail } from 'lucide-react'
 
 import { buttonVariants } from '@/components/ui/button'
@@ -56,6 +56,8 @@ function LinkedinIcon({ className }: { className?: string }) {
 
 export function Footer() {
   const { t } = useI18n()
+  const { pathname } = useLocation()
+  const onStore = pathname === '/tienda'
 
   const sections = [
     { to: '/', label: t.nav.home },
@@ -66,7 +68,7 @@ export function Footer() {
 
   const socials = [
     { href: DISCORD_URL, label: 'Discord', Icon: DiscordIcon },
-    { href: GITHUB_URL, label: 'GitHub', Icon: GithubIcon },
+    { href: GITHUB_URL, label: 'GitHub', Icon: GithubIcon, pending: true },
     { href: SOCIALS.x, label: 'X', Icon: XIcon },
     { href: SOCIALS.youtube, label: 'YouTube', Icon: YoutubeIcon },
     { href: SOCIALS.instagram, label: 'Instagram', Icon: InstagramIcon },
@@ -78,13 +80,22 @@ export function Footer() {
       <div className="dd-hero-bg border-b border-border px-4 py-14 md:px-6 md:py-16">
         <div className="mx-auto flex max-w-6xl flex-col items-start justify-between gap-6 sm:flex-row sm:items-center">
           <div>
-            <p className="font-mono text-xs text-accent">{t.footer.ctaLabel}</p>
-            <h2 className="mt-2 font-display text-2xl font-bold tracking-tight md:text-3xl">{t.footer.ctaTitle}</h2>
+            <p className="font-mono text-xs text-accent">{onStore ? t.footer.ctaLabelStore : t.footer.ctaLabel}</p>
+            <h2 className="mt-2 font-display text-2xl font-bold tracking-tight md:text-3xl">
+              {onStore ? t.footer.ctaTitleStore : t.footer.ctaTitle}
+            </h2>
           </div>
-          <Link to="/tienda" className={buttonVariants({ size: 'lg' })}>
-            {t.footer.ctaButton}
-            <ArrowRight aria-hidden="true" />
-          </Link>
+          {onStore ? (
+            <a href={DISCORD_URL} target="_blank" rel="noreferrer" className={buttonVariants({ size: 'lg' })}>
+              {t.footer.ctaButtonStore}
+              <ArrowRight aria-hidden="true" />
+            </a>
+          ) : (
+            <Link to="/tienda" className={buttonVariants({ size: 'lg' })}>
+              {t.footer.ctaButton}
+              <ArrowRight aria-hidden="true" />
+            </Link>
+          )}
         </div>
       </div>
 
@@ -139,19 +150,31 @@ export function Footer() {
           <div>
             <h2 className="font-mono text-xs text-muted-foreground uppercase">{t.footer.follow}</h2>
             <ul className="mt-4 flex flex-wrap gap-2">
-              {socials.map(({ href, label, Icon }) => (
-                <li key={label}>
-                  <a
-                    href={href}
-                    target="_blank"
-                    rel="noreferrer"
-                    aria-label={label}
-                    className="inline-flex size-9 items-center justify-center rounded-chip border border-border text-muted-foreground transition-colors hover:border-accent hover:text-accent"
-                  >
-                    <Icon className="size-4" />
-                  </a>
-                </li>
-              ))}
+              {socials.map(({ href, label, Icon, pending }) =>
+                pending ? (
+                  <li key={label}>
+                    <span
+                      aria-label={`${label} — ${t.footer.pendingSocial}`}
+                      title={`${label} — ${t.footer.pendingSocial}`}
+                      className="inline-flex size-9 cursor-not-allowed items-center justify-center rounded-chip border border-dashed border-input text-muted-foreground/40"
+                    >
+                      <Icon className="size-4" />
+                    </span>
+                  </li>
+                ) : (
+                  <li key={label}>
+                    <a
+                      href={href}
+                      target="_blank"
+                      rel="noreferrer"
+                      aria-label={label}
+                      className="inline-flex size-9 items-center justify-center rounded-chip border border-border text-muted-foreground transition-colors hover:border-accent hover:text-accent"
+                    >
+                      <Icon className="size-4" />
+                    </a>
+                  </li>
+                )
+              )}
             </ul>
             <Show when="signed-out">
               <p className="mt-5 font-mono text-xs text-muted-foreground">

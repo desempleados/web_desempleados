@@ -112,7 +112,10 @@ export function Store() {
                           {i.product.name[lang]}
                           {i.qty > 1 && <span className="text-muted-foreground"> ×{i.qty}</span>}
                         </span>
-                        <span className="font-mono">US${i.amount}</span>
+                        <span className="font-mono">
+                          {i.product.price.mode === 'range' && <span className="text-muted-foreground">{t.store.from} </span>}
+                          US${i.amount}
+                        </span>
                       </li>
                     ))}
                   </ul>

@@ -3,7 +3,7 @@ import { ArrowUpRight } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 import { ProjectShot } from '@/components/ProjectShot'
 import { SectionHeading } from '@/components/SectionHeading'
-import { GITHUB_URL, PROJECTS } from '@/content/data'
+import { PROJECTS } from '@/content/data'
 import { useI18n } from '@/i18n'
 import type { Project } from '@/content/data'
 
@@ -62,15 +62,9 @@ export function ProjectsPage() {
             <ProjectRow key={p.id} project={p} index={i} />
           ))}
         </div>
-        <a
-          href={GITHUB_URL}
-          target="_blank"
-          rel="noreferrer"
-          className="mt-12 inline-flex items-center gap-2 font-mono text-sm text-muted-foreground underline-offset-4 hover:text-accent hover:underline"
-        >
+        <p className="mt-12 inline-flex items-center gap-2 font-mono text-sm text-muted-foreground/70">
           {t.projectsPage.more}
-          <ArrowUpRight aria-hidden="true" className="size-4" />
-        </a>
+        </p>
       </div>
     </section>
   )

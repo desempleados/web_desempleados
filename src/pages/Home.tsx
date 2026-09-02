@@ -6,7 +6,7 @@ import { buttonVariants } from '@/components/ui/button'
 import { HeroTerminal } from '@/components/HeroTerminal'
 import { SectionHeading } from '@/components/SectionHeading'
 import { DiscordIcon, GithubIcon } from '@/components/Footer'
-import { DISCORD_URL, GITHUB_URL, PRODUCTS } from '@/content/data'
+import { DISCORD_URL, PRODUCTS } from '@/content/data'
 import { useI18n } from '@/i18n'
 import { cn, formatPrice } from '@/lib/utils'
 
@@ -52,11 +52,11 @@ function Services() {
             >
               <div className="flex items-baseline justify-between gap-4">
                 <h3 className="font-display text-xl font-bold tracking-tight">{p.name[lang]}</h3>
-                <span className="font-mono text-sm text-accent">{formatPrice(p.price, t.store.quote, t.store.monthly)}</span>
+                <span className="shrink-0 font-mono text-sm text-accent">{formatPrice(p.price, t.store.quote, t.store.monthly)}</span>
               </div>
               <p className="mt-3 line-clamp-2 text-sm text-muted-foreground">{p.bullets.map((b) => b[lang]).join(' · ')}</p>
               <span className="mt-5 inline-flex items-center gap-1.5 font-mono text-sm text-accent">
-                {t.store.add}
+                {t.home.servicesCta}
                 <ArrowRight aria-hidden="true" className="size-4 transition-transform group-hover:translate-x-0.5" />
               </span>
             </Link>
@@ -131,21 +131,16 @@ function Community() {
             </span>
             <ArrowRight aria-hidden="true" className="ml-auto size-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5" />
           </a>
-          <a
-            href={GITHUB_URL}
-            target="_blank"
-            rel="noreferrer"
-            className="group flex items-center gap-4 rounded-card border border-border bg-background p-6 transition-colors hover:border-accent/50"
-          >
-            <span className="flex size-12 shrink-0 items-center justify-center rounded-chip bg-muted text-foreground">
+          <div className="flex items-center gap-4 rounded-card border border-dashed border-input bg-background/60 p-6">
+            <span className="flex size-12 shrink-0 items-center justify-center rounded-chip bg-muted text-muted-foreground/60">
               <GithubIcon className="size-6" />
             </span>
             <span>
-              <span className="block font-medium">{t.home.githubCta}</span>
-              <span className="mt-0.5 block text-sm text-muted-foreground">{t.home.githubNote}</span>
+              <span className="block font-medium text-muted-foreground">{t.home.githubCta}</span>
+              <span className="mt-0.5 block text-sm text-muted-foreground/70">{t.home.githubNote}</span>
             </span>
-            <ArrowRight aria-hidden="true" className="ml-auto size-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5" />
-          </a>
+            <span className="ml-auto shrink-0 font-mono text-xs text-muted-foreground">{t.home.githubPending}</span>
+          </div>
         </div>
       </div>
     </section>
