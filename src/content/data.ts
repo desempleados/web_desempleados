@@ -95,7 +95,8 @@ export interface Project {
   metrics: Bi
   commits: string[]
   status: 'live' | 'beta' | 'wip'
-  url: string
+  /** Repo real: existe pero todavía no se linkea públicamente. Se completa después. */
+  url?: string
 }
 
 export const PROJECTS: Project[] = [
@@ -111,7 +112,6 @@ export const PROJECTS: Project[] = [
     metrics: { es: '130 usuarios · 42 ofertas activas', en: '130 users · 42 active listings' },
     commits: ['feat: filtro de salario real', 'fix: zona horaria en remotas', 'chore: drizzle ORM'],
     status: 'beta',
-    url: GITHUB_URL, // PROVISIONAL
   },
   {
     id: 'pingui-bot',
@@ -125,7 +125,6 @@ export const PROJECTS: Project[] = [
     metrics: { es: '8 servidores · 3.1k miembros', en: '8 servers · 3.1k members' },
     commits: ['feat: niveles anti-farm', 'fix: rate limit /limpiar', 'perf: cache redis'],
     status: 'live',
-    url: GITHUB_URL, // PROVISIONAL
   },
   {
     id: 'factura-feliz',
@@ -139,7 +138,6 @@ export const PROJECTS: Project[] = [
     metrics: { es: '214 facturas generadas', en: '214 invoices generated' },
     commits: ['feat: plantilla con logo', 'fix: redondeo de IVA', 'chore: export JSON'],
     status: 'live',
-    url: GITHUB_URL, // PROVISIONAL
   },
   {
     id: 'stack-cv',
@@ -153,20 +151,20 @@ export const PROJECTS: Project[] = [
     metrics: { es: 'en construcción', en: 'under construction' },
     commits: ['feat: parser JSON a CV', 'wip: modo ATS'],
     status: 'wip',
-    url: GITHUB_URL, // PROVISIONAL
   },
 ]
 
 /* --------------------------------- Equipo -------------------------------- */
 /* Nombres y roles reales (del sitio anterior). Fotos: drop your files in   */
-/* src/assets/team/ and import them here. GitHub: PROVISIONAL.              */
+/* src/assets/team/ and import them here. Perfiles de GitHub: existen pero  */
+/* se linkean después (ver Project.url).                                    */
 
 export interface Member {
   id: string
   name: string
   role: Bi
   bio: Bi
-  github: string
+  github?: string
   photo?: string
 }
 
@@ -179,7 +177,6 @@ export const TEAM: Member[] = [
       es: 'Sistemas embebidos, APIs y bases de datos. Lo que se cae, lo levanta; lo que funciona, es suyo.',
       en: 'Embedded systems, APIs and databases. If it goes down he fixes it; if it works, it is his.',
     },
-    github: GITHUB_URL, // PROVISIONAL
   },
   {
     id: 'santiago',
@@ -189,7 +186,6 @@ export const TEAM: Member[] = [
       es: 'Bots, RPA y agentes autónomos. Escribe los pipelines que ahorran horas de trabajo aburrido.',
       en: 'Bots, RPA and autonomous agents. Writes the pipelines that save hours of boring work.',
     },
-    github: GITHUB_URL, // PROVISIONAL
   },
   {
     id: 'ortiz',
@@ -199,6 +195,5 @@ export const TEAM: Member[] = [
       es: 'Interfaces precisas y arquitectura de pagos. Diseña lo que ves y cobra a tiempo.',
       en: 'Precise interfaces and payment architecture. Designs what you see and invoices on time.',
     },
-    github: GITHUB_URL, // PROVISIONAL
   },
 ]

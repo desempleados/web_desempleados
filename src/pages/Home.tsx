@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
 import { buttonVariants } from '@/components/ui/button'
+import { HeroTerminal } from '@/components/HeroTerminal'
 import { SectionHeading } from '@/components/SectionHeading'
 import { DiscordIcon, GithubIcon } from '@/components/Footer'
 import { DISCORD_URL, GITHUB_URL, PRODUCTS } from '@/content/data'
@@ -13,21 +14,47 @@ function Hero() {
   const { t } = useI18n()
   return (
     <section className="dd-hero-bg px-4 md:px-6" aria-labelledby="hero-title">
-      <div className="mx-auto flex min-h-[62vh] max-w-6xl flex-col items-start justify-center py-20 md:py-24">
-        <h1 id="hero-title" className="max-w-3xl font-display text-[clamp(2.5rem,6vw,4.75rem)] leading-[1.02] font-extrabold tracking-tight text-balance">
-          {t.hero.title}
-        </h1>
-        <p className="mt-6 max-w-xl text-lg text-muted-foreground">{t.hero.lead}</p>
-        <div className="mt-9 flex flex-wrap items-center gap-3">
-          <Link to="/tienda" className={cn(buttonVariants({ size: 'lg' }))}>
-            {t.hero.ctaPrimary}
-            <ArrowRight aria-hidden="true" />
-          </Link>
-          <Link to="/proyectos" className={cn(buttonVariants({ variant: 'outline', size: 'lg' }))}>
-            {t.hero.ctaSecondary}
-          </Link>
+      <div className="mx-auto grid max-w-6xl items-center gap-10 py-20 md:py-24 lg:min-h-[62vh] lg:grid-cols-[1.15fr_1fr]">
+        <div className="flex flex-col items-start justify-center">
+          <h1 id="hero-title" className="max-w-3xl font-display text-[clamp(2.5rem,6vw,4.75rem)] leading-[1.02] font-extrabold tracking-tight text-balance">
+            {t.hero.title}
+          </h1>
+          <p className="mt-6 max-w-xl text-lg text-muted-foreground">{t.hero.lead}</p>
+          <div className="mt-9 flex flex-wrap items-center gap-3">
+            <Link to="/tienda" className={cn(buttonVariants({ size: 'lg' }))}>
+              {t.hero.ctaPrimary}
+              <ArrowRight aria-hidden="true" />
+            </Link>
+            <Link to="/proyectos" className={cn(buttonVariants({ variant: 'outline', size: 'lg' }))}>
+              {t.hero.ctaSecondary}
+            </Link>
+          </div>
+          <p className="mt-10 font-mono text-xs text-muted-foreground">{t.hero.stackLine}</p>
         </div>
-        <p className="mt-10 font-mono text-xs text-muted-foreground">{t.hero.stackLine}</p>
+        <HeroTerminal />
+      </div>
+    </section>
+  )
+}
+
+function Specialties() {
+  const { t } = useI18n()
+  return (
+    <section aria-labelledby="especialidad-title" className="border-b border-border px-4 py-8 md:px-6">
+      <div className="mx-auto max-w-6xl">
+        <p id="especialidad-title" className="font-mono text-xs text-muted-foreground">
+          {t.home.specialtyLabel}
+        </p>
+        <ul className="mt-4 flex flex-wrap gap-2">
+          {t.home.specialtyPlaceholders.map((s) => (
+            <li
+              key={s}
+              className="rounded-chip border border-dashed border-input px-3 py-1.5 font-mono text-xs text-muted-foreground"
+            >
+              {s}
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
   )
@@ -155,6 +182,7 @@ export function Home() {
   return (
     <>
       <Hero />
+      <Specialties />
       <Services />
       <Why />
       <Faq />

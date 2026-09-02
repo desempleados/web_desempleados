@@ -26,15 +26,21 @@ function ProjectRow({ project, index }: { project: Project; index: number }) {
         <p className="mt-3 text-muted-foreground">{project.tagline[lang]}</p>
         <p className="mt-4 font-mono text-xs text-muted-foreground">{project.stack.join(' · ')}</p>
         <p className="mt-1 font-mono text-xs text-accent">{project.metrics[lang]}</p>
-        <a
-          href={project.url}
-          target="_blank"
-          rel="noreferrer"
-          className="mt-5 inline-flex w-fit items-center gap-1.5 rounded-chip font-mono text-sm font-medium text-accent underline-offset-4 hover:underline focus-visible:ring-2 focus-visible:ring-ring"
-        >
-          {t.projectsPage.ctaCode}
-          <ArrowUpRight aria-hidden="true" className="size-4" />
-        </a>
+        {project.url ? (
+          <a
+            href={project.url}
+            target="_blank"
+            rel="noreferrer"
+            className="mt-5 inline-flex w-fit items-center gap-1.5 rounded-chip font-mono text-sm font-medium text-accent underline-offset-4 hover:underline focus-visible:ring-2 focus-visible:ring-ring"
+          >
+            {t.projectsPage.ctaCode}
+            <ArrowUpRight aria-hidden="true" className="size-4" />
+          </a>
+        ) : (
+          <span className="mt-5 inline-flex w-fit items-center gap-1.5 rounded-chip font-mono text-sm text-muted-foreground">
+            {t.projectsPage.comingSoon}
+          </span>
+        )}
       </div>
     </article>
   )

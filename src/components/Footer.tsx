@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
-import { Mail } from 'lucide-react'
+import { ArrowRight, Mail } from 'lucide-react'
 
+import { buttonVariants } from '@/components/ui/button'
 import { DISCORD_URL, EMAIL, GITHUB_URL, SOCIALS } from '@/content/data'
 import { useI18n } from '@/i18n'
 import { Show } from '@clerk/react'
@@ -61,7 +62,6 @@ export function Footer() {
     { to: '/proyectos', label: t.nav.projects },
     { to: '/tienda', label: t.nav.store },
     { to: '/nosotros', label: t.nav.about },
-    { to: '/admin', label: t.nav.admin },
   ]
 
   const socials = [
@@ -74,8 +74,22 @@ export function Footer() {
   ]
 
   return (
-    <footer className="border-t border-border px-4 pt-14 pb-8 md:px-6 md:pt-20">
-      <div className="mx-auto max-w-6xl">
+    <footer className="border-t border-border">
+      <div className="dd-hero-bg border-b border-border px-4 py-14 md:px-6 md:py-16">
+        <div className="mx-auto flex max-w-6xl flex-col items-start justify-between gap-6 sm:flex-row sm:items-center">
+          <div>
+            <p className="font-mono text-xs text-accent">{t.footer.ctaLabel}</p>
+            <h2 className="mt-2 font-display text-2xl font-bold tracking-tight md:text-3xl">{t.footer.ctaTitle}</h2>
+          </div>
+          <Link to="/tienda" className={buttonVariants({ size: 'lg' })}>
+            {t.footer.ctaButton}
+            <ArrowRight aria-hidden="true" />
+          </Link>
+        </div>
+      </div>
+
+      <div className="px-4 pt-14 pb-8 md:px-6 md:pt-16">
+        <div className="mx-auto max-w-6xl">
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
           <div>
             <p className="font-mono text-lg font-bold tracking-tight">
@@ -152,6 +166,7 @@ export function Footer() {
         <div className="mt-12 border-t border-border pt-6 font-mono text-xs text-muted-foreground">
           <p>© {new Date().getFullYear()} desempleados.dev — {t.footer.rights}</p>
         </div>
+      </div>
       </div>
     </footer>
   )

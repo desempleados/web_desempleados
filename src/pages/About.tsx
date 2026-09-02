@@ -35,16 +35,23 @@ export function About() {
               <p className="mt-0.5 font-mono text-xs text-accent">{m.role[lang]}</p>
               <p className="mt-3 text-sm text-muted-foreground">{m.bio[lang]}</p>
 
-              <a
-                href={m.github}
-                target="_blank"
-                rel="noreferrer"
-                className="mt-auto inline-flex w-fit items-center gap-2 pt-5 font-mono text-sm text-muted-foreground underline-offset-4 hover:text-accent hover:underline"
-              >
-                <GithubIcon className="size-4" />
-                {t.aboutPage.github}
-                <span className="sr-only"> — {m.name}</span>
-              </a>
+              {m.github ? (
+                <a
+                  href={m.github}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="mt-auto inline-flex w-fit items-center gap-2 pt-5 font-mono text-sm text-muted-foreground underline-offset-4 hover:text-accent hover:underline"
+                >
+                  <GithubIcon className="size-4" />
+                  {t.aboutPage.github}
+                  <span className="sr-only"> — {m.name}</span>
+                </a>
+              ) : (
+                <span className="mt-auto inline-flex w-fit items-center gap-2 pt-5 font-mono text-sm text-muted-foreground/60">
+                  <GithubIcon className="size-4" />
+                  {t.aboutPage.githubPending}
+                </span>
+              )}
             </article>
           ))}
         </div>
