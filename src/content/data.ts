@@ -26,6 +26,8 @@ export interface Product {
   id: string
   name: Bi
   price: { mode: 'fixed' | 'range' | 'quote'; value?: number; min?: number; max?: number; monthly?: boolean }
+  /** Tiempo de entrega o SLA — se muestra como chip aparte, no como bullet. */
+  delivery: Bi
   bullets: Bi[]
 }
 
@@ -34,16 +36,17 @@ export const PRODUCTS: Product[] = [
     id: 'landing',
     name: { es: 'Landing Page', en: 'Landing Page' },
     price: { mode: 'range', min: 15, max: 30 },
+    delivery: { es: '5–10 días', en: '5–10 days' },
     bullets: [
       { es: 'Sitio de una sola página, diseño a medida', en: 'One-page site, custom design' },
       { es: 'Responsive y con formulario de contacto', en: 'Responsive, with contact form' },
-      { es: 'Entrega: 5–10 días', en: 'Delivery: 5–10 days' },
     ],
   },
   {
     id: 'web-app',
     name: { es: 'Web o App a Medida', en: 'Custom Website or App' },
     price: { mode: 'range', min: 40, max: 100 },
+    delivery: { es: '2–4 semanas', en: '2–4 weeks' },
     bullets: [
       { es: 'Sitio web, plataforma o app móvil completa', en: 'Full website, platform or mobile app' },
       { es: 'Diseño, desarrollo y despliegue incluidos', en: 'Design, development and deployment included' },
@@ -54,6 +57,7 @@ export const PRODUCTS: Product[] = [
     id: 'bots-automatizaciones',
     name: { es: 'Bots & Automatizaciones', en: 'Bots & Automations' },
     price: { mode: 'range', min: 10, max: 25 },
+    delivery: { es: '1–2 semanas', en: '1–2 weeks' },
     bullets: [
       { es: 'Discord, Telegram, WhatsApp o Slack', en: 'Discord, Telegram, WhatsApp or Slack' },
       { es: 'Scraping, reportes automáticos y más', en: 'Scraping, automated reports and more' },
@@ -64,6 +68,7 @@ export const PRODUCTS: Product[] = [
     id: 'mantenimiento',
     name: { es: 'Mantenimiento Mensual', en: 'Monthly Maintenance' },
     price: { mode: 'range', min: 5, max: 15, monthly: true },
+    delivery: { es: 'Respuesta en 24h', en: '24h response' },
     bullets: [
       { es: 'Soporte y ajustes continuos', en: 'Ongoing support and tweaks' },
       { es: 'Para un proyecto ya entregado', en: 'For an already-delivered project' },

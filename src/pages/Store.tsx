@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react'
 import { useClerk, useUser } from '@clerk/react'
-import { Plus, ShoppingCart, Trash2 } from 'lucide-react'
+import { Clock, Plus, ShoppingCart, Trash2 } from 'lucide-react'
 
+import { Badge } from '@/components/ui/badge'
 import { Button, buttonVariants } from '@/components/ui/button'
 import { SectionHeading } from '@/components/SectionHeading'
 import { DISCORD_URL, PRODUCTS } from '@/content/data'
+import { PRODUCT_ICONS } from '@/content/productIcons'
 import { useI18n } from '@/i18n'
 import { formatPrice } from '@/lib/utils'
 import {
@@ -56,20 +58,27 @@ export function Store() {
           <div className="grid gap-4 sm:grid-cols-2 lg:col-span-8">
             {PRODUCTS.map((p) => {
               const inCart = getCart().some((i) => i.productId === p.id)
+              const Icon = PRODUCT_ICONS[p.id]
               return (
-                <article key={p.id} className="flex flex-col rounded-card border border-border bg-surface p-6">
-                  <div className="flex items-baseline justify-between gap-3">
-                    <h3 className="font-display text-lg font-bold tracking-tight">{p.name[lang]}</h3>
-                    <span className="shrink-0 font-mono text-sm font-bold text-accent">
-                      {formatPrice(p.price, t.store.quote, t.store.monthly)}
+                <article
+                  key={p.id}
+                  className="group flex flex-col rounded-card border border-border bg-surface p-6 transition-[transform,border-color] duration-200 hover:-translate-y-1 hover:border-accent/40"
+                >
+                  <div className="flex items-center gap-3">
+                    <span className="flex size-9 shrink-0 items-center justify-center rounded-chip bg-accent/10 text-accent transition-transform duration-200 group-hover:scale-110">
+                      <Icon aria-hidden="true" className="size-4" />
                     </span>
+                    <h3 className="font-display text-lg font-bold tracking-tight">{p.name[lang]}</h3>
                   </div>
-                  <ul className="mt-4 space-y-1.5 text-sm text-muted-foreground">
+                  <p className="mt-4 font-mono text-2xl font-bold text-accent">
+                    {formatPrice(p.price, t.store.quote, t.store.monthly)}
+                  </p>
+                  <ul className="mt-3 space-y-1.5 text-sm text-muted-foreground">
                     {p.bullets.map((b, i) => (
                       <li key={i}>· {b[lang]}</li>
                     ))}
                   </ul>
-                  <div className="mt-auto pt-5">
+                  <div className="mt-auto flex flex-wrap items-center justify-between gap-3 pt-5">
                     {p.price.mode !== 'quote' ? (
                       <Button size="sm" variant={inCart ? 'outline' : 'default'} onClick={() => (inCart ? removeFromCart(p.id) : addToCart(p.id))}>
                         {inCart ? <Trash2 aria-hidden="true" /> : <Plus aria-hidden="true" />}
@@ -83,6 +92,10 @@ export function Store() {
                         {t.store.quoteCta}
                       </a>
                     )}
+                    <Badge variant="outline">
+                      <Clock aria-hidden="true" />
+                      {p.delivery[lang]}
+                    </Badge>
                   </div>
                 </article>
               )

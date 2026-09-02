@@ -1,13 +1,18 @@
-import { ArrowRight } from 'lucide-react'
+import { ArrowRight, Braces, Clock, MessageCircle } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
+import { Badge } from '@/components/ui/badge'
 import { buttonVariants } from '@/components/ui/button'
+import { ProjectShot } from '@/components/ProjectShot'
 import { SectionHeading } from '@/components/SectionHeading'
 import { DiscordIcon, GithubIcon } from '@/components/Footer'
-import { DISCORD_URL, PRODUCTS } from '@/content/data'
+import { DISCORD_URL, PRODUCTS, PROJECTS } from '@/content/data'
+import { PRODUCT_ICONS } from '@/content/productIcons'
 import { useI18n } from '@/i18n'
 import { cn, formatPrice } from '@/lib/utils'
+
+const WHY_ICONS = [MessageCircle, Clock, Braces]
 
 /** Placeholder honesto: nada de terminal simulada tipeando — cuando haya un
  * proyecto real que mostrar, esto se reemplaza por su captura real. */
@@ -54,6 +59,43 @@ function Hero() {
   )
 }
 
+function FeaturedProjects() {
+  const { t, lang } = useI18n()
+  const featured = PROJECTS.slice(0, 3)
+  return (
+    <section aria-labelledby="proyectos-home-title" className="border-b border-border px-4 py-12 md:px-6 md:py-16">
+      <div className="mx-auto max-w-6xl">
+        <SectionHeading id="proyectos-home-title" title={t.home.projectsTitle} lead={t.home.projectsLead} />
+        <div className="mt-10 grid gap-4 md:grid-cols-3">
+          {featured.map((p) => (
+            <Link
+              key={p.id}
+              to="/proyectos"
+              className="group overflow-hidden rounded-card border border-border bg-surface transition-[transform,border-color] duration-200 hover:-translate-y-1 hover:border-accent/40"
+            >
+              <ProjectShot kind={p.shot} name={p.name} />
+              <div className="p-5">
+                <div className="flex items-center gap-2">
+                  <h3 className="font-mono text-base font-bold tracking-tight">{p.name}</h3>
+                  <Badge variant="status">{t.projectsPage.statuses[p.status]}</Badge>
+                </div>
+                <p className="mt-2 line-clamp-2 text-sm text-muted-foreground">{p.tagline[lang]}</p>
+              </div>
+            </Link>
+          ))}
+        </div>
+        <Link
+          to="/proyectos"
+          className="mt-8 inline-flex items-center gap-2 font-mono text-sm text-muted-foreground underline-offset-4 hover:text-accent hover:underline active:text-accent-strong"
+        >
+          {t.home.projectsCta}
+          <ArrowRight aria-hidden="true" className="size-4" />
+        </Link>
+      </div>
+    </section>
+  )
+}
+
 function Services() {
   const { t, lang } = useI18n()
   return (
@@ -61,23 +103,37 @@ function Services() {
       <div className="mx-auto max-w-6xl">
         <SectionHeading id="servicios-title" label={t.home.servicesLabel} title={t.home.servicesTitle} />
         <div className="mt-10 grid gap-4 md:grid-cols-2">
-          {PRODUCTS.map((p) => (
-            <Link
-              key={p.id}
-              to="/tienda"
-              className="group rounded-card border border-border bg-surface p-7 transition-colors hover:border-accent/50 active:border-accent"
-            >
-              <div className="flex items-baseline justify-between gap-4">
-                <h3 className="font-display text-xl font-bold tracking-tight">{p.name[lang]}</h3>
-                <span className="shrink-0 font-mono text-sm text-accent">{formatPrice(p.price, t.store.quote, t.store.monthly)}</span>
-              </div>
-              <p className="mt-3 line-clamp-2 text-sm text-muted-foreground">{p.bullets.map((b) => b[lang]).join(' · ')}</p>
-              <span className="mt-5 inline-flex items-center gap-1.5 font-mono text-sm text-accent">
-                {t.home.servicesCta}
-                <ArrowRight aria-hidden="true" className="size-4 transition-transform group-hover:translate-x-0.5" />
-              </span>
-            </Link>
-          ))}
+          {PRODUCTS.map((p) => {
+            const Icon = PRODUCT_ICONS[p.id]
+            return (
+              <Link
+                key={p.id}
+                to="/tienda"
+                className="group rounded-card border border-border bg-surface p-7 transition-[transform,border-color] duration-200 hover:-translate-y-1 hover:border-accent/50 active:border-accent"
+              >
+                <div className="flex items-center justify-between gap-4">
+                  <div className="flex items-center gap-3">
+                    <span className="flex size-9 shrink-0 items-center justify-center rounded-chip bg-accent/10 text-accent transition-transform duration-200 group-hover:scale-110">
+                      <Icon aria-hidden="true" className="size-4" />
+                    </span>
+                    <h3 className="font-display text-xl font-bold tracking-tight">{p.name[lang]}</h3>
+                  </div>
+                  <span className="shrink-0 font-mono text-sm text-accent">{formatPrice(p.price, t.store.quote, t.store.monthly)}</span>
+                </div>
+                <p className="mt-3 line-clamp-2 text-sm text-muted-foreground">{p.bullets.map((b) => b[lang]).join(' · ')}</p>
+                <div className="mt-5 flex items-center justify-between">
+                  <span className="inline-flex items-center gap-1.5 font-mono text-sm text-accent">
+                    {t.home.servicesCta}
+                    <ArrowRight aria-hidden="true" className="size-4 transition-transform group-hover:translate-x-0.5" />
+                  </span>
+                  <Badge variant="outline">
+                    <Clock aria-hidden="true" />
+                    {p.delivery[lang]}
+                  </Badge>
+                </div>
+              </Link>
+            )
+          })}
         </div>
         <Link to="/tienda" className="mt-8 inline-flex items-center gap-2 font-mono text-sm text-muted-foreground underline-offset-4 hover:text-accent hover:underline active:text-accent-strong">
           {t.home.servicesMore}
@@ -94,13 +150,22 @@ function Why() {
     <section aria-labelledby="why-title" className="border-y border-border bg-surface/40 px-4 py-14 md:px-6 md:py-20">
       <div className="mx-auto max-w-6xl">
         <SectionHeading id="why-title" title={t.home.whyTitle} />
-        <dl className="mt-10 grid gap-8 sm:grid-cols-3">
-          {t.home.whyPoints.map((p, i) => (
-            <div key={i} className="border-l-2 border-accent/60 pl-4">
-              <dt className="font-medium">{p.title}</dt>
-              <dd className="mt-1 text-sm text-muted-foreground">{p.body}</dd>
-            </div>
-          ))}
+        <dl className="mt-10 grid gap-4 sm:grid-cols-3">
+          {t.home.whyPoints.map((p, i) => {
+            const Icon = WHY_ICONS[i]
+            return (
+              <div
+                key={i}
+                className="group flex flex-col gap-3 rounded-card border border-border bg-background p-6 transition-[transform,border-color] duration-200 hover:-translate-y-1 hover:border-accent/40"
+              >
+                <span className="flex size-10 items-center justify-center rounded-chip bg-accent/10 text-accent transition-transform duration-200 group-hover:scale-110">
+                  <Icon aria-hidden="true" className="size-[18px]" />
+                </span>
+                <dt className="font-medium">{p.title}</dt>
+                <dd className="text-sm text-muted-foreground">{p.body}</dd>
+              </div>
+            )
+          })}
         </dl>
       </div>
     </section>
@@ -137,9 +202,9 @@ function Community() {
             href={DISCORD_URL}
             target="_blank"
             rel="noreferrer"
-            className="group flex items-center gap-4 rounded-card border border-border bg-background p-6 transition-colors hover:border-accent/50 active:border-accent"
+            className="group flex items-center gap-4 rounded-card border border-border bg-background p-6 transition-[transform,border-color] duration-200 hover:-translate-y-1 hover:border-accent/50 active:border-accent"
           >
-            <span className="flex size-12 shrink-0 items-center justify-center rounded-chip bg-[#5865F2]/15 text-[#8b9bff]">
+            <span className="flex size-12 shrink-0 items-center justify-center rounded-chip bg-[#5865F2]/15 text-[#8b9bff] transition-transform duration-200 group-hover:scale-110">
               <DiscordIcon className="size-6" />
             </span>
             <span>
@@ -168,6 +233,7 @@ export function Home() {
   return (
     <>
       <Hero />
+      <FeaturedProjects />
       <Services />
       <Why />
       <Faq />
