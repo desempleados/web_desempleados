@@ -108,7 +108,7 @@ export function Console() {
           value={input}
           onChange={(e) => setInput(e.target.value)}
           autoComplete="off"
-          className="w-full bg-transparent font-mono text-sm outline-none placeholder:text-muted-foreground/50"
+          className="w-full rounded-chip bg-transparent font-mono text-sm outline-none placeholder:text-muted-foreground/50 focus-visible:ring-2 focus-visible:ring-ring"
           placeholder="help"
         />
       </form>

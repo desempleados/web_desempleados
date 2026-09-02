@@ -86,7 +86,7 @@ export function Admin() {
               role="tab"
               aria-selected={tab === tb.id}
               onClick={() => setTab(tb.id)}
-              className={`-mb-px rounded-t-chip border-b-2 px-4 py-2.5 text-sm transition-colors ${
+              className={`-mb-px rounded-t-chip border-b-2 px-4 py-2.5 text-sm transition-colors active:text-accent ${
                 tab === tb.id
                   ? 'border-accent font-medium text-foreground'
                   : 'border-transparent text-muted-foreground hover:text-foreground'

@@ -31,7 +31,7 @@ function ProjectRow({ project, index }: { project: Project; index: number }) {
             href={project.url}
             target="_blank"
             rel="noreferrer"
-            className="mt-5 inline-flex w-fit items-center gap-1.5 rounded-chip font-mono text-sm font-medium text-accent underline-offset-4 hover:underline focus-visible:ring-2 focus-visible:ring-ring"
+            className="mt-5 inline-flex w-fit items-center gap-1.5 rounded-chip font-mono text-sm font-medium text-accent underline-offset-4 hover:underline active:text-accent-strong focus-visible:ring-2 focus-visible:ring-ring"
           >
             {t.projectsPage.ctaCode}
             <ArrowUpRight aria-hidden="true" className="size-4" />

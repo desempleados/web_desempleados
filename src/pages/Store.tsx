@@ -133,7 +133,7 @@ export function Store() {
                 <p className="mt-3 font-mono text-[11px] text-muted-foreground">{t.store.quoteCta} → mailto</p>
               )}
               <p className="mt-4 font-mono text-[11px] leading-relaxed text-muted-foreground">
-                {t.store.fine} · <a href={DISCORD_URL} target="_blank" rel="noreferrer" className="text-accent underline-offset-4 hover:underline">Discord</a>
+                {t.store.fine} · <a href={DISCORD_URL} target="_blank" rel="noreferrer" className="text-accent underline-offset-4 hover:underline active:text-accent-strong">Discord</a>
               </p>
             </div>
           </aside>

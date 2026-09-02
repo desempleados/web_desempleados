@@ -3,12 +3,29 @@ import { Link } from 'react-router-dom'
 
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
 import { buttonVariants } from '@/components/ui/button'
-import { HeroTerminal } from '@/components/HeroTerminal'
 import { SectionHeading } from '@/components/SectionHeading'
 import { DiscordIcon, GithubIcon } from '@/components/Footer'
 import { DISCORD_URL, PRODUCTS } from '@/content/data'
 import { useI18n } from '@/i18n'
 import { cn, formatPrice } from '@/lib/utils'
+
+/** Placeholder honesto: nada de terminal simulada tipeando — cuando haya un
+ * proyecto real que mostrar, esto se reemplaza por su captura real. */
+function HeroPreview() {
+  const { t } = useI18n()
+  return (
+    <div className="hidden overflow-hidden rounded-card border border-dashed border-input bg-background/40 lg:block" aria-hidden="true">
+      <div className="flex items-center gap-1.5 border-b border-dashed border-input px-4 py-2.5">
+        <span className="size-2.5 rounded-full bg-muted" />
+        <span className="size-2.5 rounded-full bg-muted" />
+        <span className="size-2.5 rounded-full bg-muted" />
+      </div>
+      <div className="flex h-44 items-center justify-center">
+        <p className="font-mono text-xs text-muted-foreground/70">{t.hero.previewPending}</p>
+      </div>
+    </div>
+  )
+}
 
 function Hero() {
   const { t } = useI18n()
@@ -31,7 +48,7 @@ function Hero() {
           </div>
           <p className="mt-10 font-mono text-xs text-muted-foreground">{t.hero.stackLine}</p>
         </div>
-        <HeroTerminal />
+        <HeroPreview />
       </div>
     </section>
   )
@@ -48,7 +65,7 @@ function Services() {
             <Link
               key={p.id}
               to="/tienda"
-              className="group rounded-card border border-border bg-surface p-7 transition-colors hover:border-accent/50"
+              className="group rounded-card border border-border bg-surface p-7 transition-colors hover:border-accent/50 active:border-accent"
             >
               <div className="flex items-baseline justify-between gap-4">
                 <h3 className="font-display text-xl font-bold tracking-tight">{p.name[lang]}</h3>
@@ -62,7 +79,7 @@ function Services() {
             </Link>
           ))}
         </div>
-        <Link to="/tienda" className="mt-8 inline-flex items-center gap-2 font-mono text-sm text-muted-foreground underline-offset-4 hover:text-accent hover:underline">
+        <Link to="/tienda" className="mt-8 inline-flex items-center gap-2 font-mono text-sm text-muted-foreground underline-offset-4 hover:text-accent hover:underline active:text-accent-strong">
           {t.home.servicesMore}
           <ArrowRight aria-hidden="true" className="size-4" />
         </Link>
@@ -74,9 +91,9 @@ function Services() {
 function Why() {
   const { t } = useI18n()
   return (
-    <section aria-labelledby="why-title" className="border-y border-border bg-surface/40 px-4 py-16 md:px-6 md:py-24">
+    <section aria-labelledby="why-title" className="border-y border-border bg-surface/40 px-4 py-14 md:px-6 md:py-20">
       <div className="mx-auto max-w-6xl">
-        <SectionHeading id="why-title" label={t.home.whyLabel} title={t.home.whyTitle} />
+        <SectionHeading id="why-title" title={t.home.whyTitle} />
         <dl className="mt-10 grid gap-8 sm:grid-cols-3">
           {t.home.whyPoints.map((p, i) => (
             <div key={i} className="border-l-2 border-accent/60 pl-4">
@@ -93,7 +110,7 @@ function Why() {
 function Faq() {
   const { t } = useI18n()
   return (
-    <section aria-labelledby="faq-title" className="px-4 py-20 md:px-6 md:py-28">
+    <section aria-labelledby="faq-title" className="px-4 py-24 md:px-6 md:py-32">
       <div className="mx-auto max-w-3xl">
         <SectionHeading id="faq-title" label={t.home.faqLabel} title={t.home.faqTitle} />
         <Accordion type="single" collapsible className="mt-8 w-full">
@@ -112,15 +129,15 @@ function Faq() {
 function Community() {
   const { t } = useI18n()
   return (
-    <section aria-labelledby="comunidad-title" className="border-t border-border bg-surface/40 px-4 py-20 md:px-6 md:py-28">
+    <section aria-labelledby="comunidad-title" className="border-t border-border bg-surface/40 px-4 py-16 md:px-6 md:py-24">
       <div className="mx-auto max-w-6xl">
-        <SectionHeading id="comunidad-title" label={t.home.communityLabel} title={t.home.communityTitle} lead={t.home.communityLead} />
+        <SectionHeading id="comunidad-title" title={t.home.communityTitle} lead={t.home.communityLead} />
         <div className="mt-10 grid gap-4 sm:grid-cols-2">
           <a
             href={DISCORD_URL}
             target="_blank"
             rel="noreferrer"
-            className="group flex items-center gap-4 rounded-card border border-border bg-background p-6 transition-colors hover:border-accent/50"
+            className="group flex items-center gap-4 rounded-card border border-border bg-background p-6 transition-colors hover:border-accent/50 active:border-accent"
           >
             <span className="flex size-12 shrink-0 items-center justify-center rounded-chip bg-[#5865F2]/15 text-[#8b9bff]">
               <DiscordIcon className="size-6" />

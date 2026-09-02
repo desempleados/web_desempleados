@@ -26,7 +26,7 @@ createRoot(document.getElementById('root')!).render(
       proxyUrl={PROXY_URL}
       appearance={{
         variables: {
-          colorPrimary: '#38d5f2',
+          colorPrimary: '#f2a33b',
           colorBackground: '#0c1218',
           colorInput: '#121a22',
           borderRadius: '0.375rem',

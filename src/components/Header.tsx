@@ -32,14 +32,14 @@ export function Header() {
 
   const navCls = ({ isActive }: { isActive: boolean }) =>
     cn(
-      'rounded-chip px-3 py-2 text-sm transition-colors',
+      'rounded-chip px-3 py-2 text-sm transition-colors active:bg-muted/70',
       isActive ? 'bg-muted font-medium text-foreground' : 'text-muted-foreground hover:bg-muted hover:text-foreground'
     )
 
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-background/85 backdrop-blur-md">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-4 md:px-6">
-        <Link to="/" className="font-mono text-sm font-bold tracking-tight" aria-label="desempleados.dev">
+        <Link to="/" className="font-mono text-base font-bold tracking-tight" aria-label="desempleados.dev">
           <span className="text-accent">~/</span>desempleados.dev
         </Link>
 
@@ -60,8 +60,8 @@ export function Header() {
                 onClick={() => setLang(l)}
                 aria-pressed={lang === l}
                 className={cn(
-                  'rounded-[3px] px-2 py-1 font-mono text-xs font-medium transition-colors',
-                  lang === l ? 'bg-accent text-accent-foreground' : 'text-muted-foreground hover:text-foreground'
+                  'rounded-[3px] px-2 py-1 font-mono text-xs font-medium transition-colors active:scale-[0.94]',
+                  lang === l ? 'bg-accent text-accent-foreground' : 'text-muted-foreground hover:text-foreground active:text-accent'
                 )}
               >
                 {l.toUpperCase()}
@@ -105,14 +105,30 @@ export function Header() {
         </div>
       </div>
 
-      <div id="menu-movil" hidden={!open} className="border-t border-border bg-background md:hidden">
-        <nav aria-label="móvil" className="mx-auto flex max-w-6xl flex-col px-4 py-3">
-          {links.map((l) => (
-            <NavLink key={l.to} to={l.to} end={l.to === '/'} onClick={() => setOpen(false)} className="rounded-chip px-3 py-3 text-base hover:bg-muted">
-              {l.label}
-            </NavLink>
-          ))}
-        </nav>
+      <div
+        id="menu-movil"
+        aria-hidden={!open}
+        inert={!open}
+        className={cn(
+          'grid transition-[grid-template-rows] duration-200 ease-out md:hidden',
+          open ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'
+        )}
+      >
+        <div className="overflow-hidden border-t border-border bg-background">
+          <nav aria-label="móvil" className="mx-auto flex max-w-6xl flex-col px-4 py-3">
+            {links.map((l) => (
+              <NavLink
+                key={l.to}
+                to={l.to}
+                end={l.to === '/'}
+                onClick={() => setOpen(false)}
+                className="rounded-chip px-3 py-3 text-base transition-colors hover:bg-muted active:bg-muted/70"
+              >
+                {l.label}
+              </NavLink>
+            ))}
+          </nav>
+        </div>
       </div>
     </header>
   )

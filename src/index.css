@@ -3,7 +3,11 @@
 @custom-variant dark (&:is(.dark *));
 
 /* ---------------------------------------------------------------------------
-   desempleados.dev — dark cian sobre carbón (herencia SYNTHEX)
+   desempleados.dev — ámbar de fósforo CRT sobre carbón.
+   El accent es ámbar (H≈35°), no cian/violeta: esas dos ventanas de matiz son
+   las que con más frecuencia se asocian a paletas generadas por IA. El ámbar
+   monocromático es tan "terminal real" como el cian (monitores CRT de fósforo
+   ámbar, anteriores a los verdes/cian) pero no cae en esa ventana.
 --------------------------------------------------------------------------- */
 :root,
 .dark {
@@ -13,13 +17,14 @@
   --surface-foreground: #e6edf3;
   --muted: #121a22;
   --muted-foreground: #8b98a5;
-  --accent: #38d5f2;
-  --accent-foreground: #05202a;
-  --panel: #0a2129;
-  --panel-foreground: #d6f5fc;
+  --accent: #f2a33b;
+  --accent-strong: #ffc670;
+  --accent-foreground: #241503;
+  --panel: #1f1408;
+  --panel-foreground: #f5dfb8;
   --border: #1a2430;
   --input: #23303c;
-  --ring: #38d5f2;
+  --ring: #f2a33b;
   color-scheme: dark;
 }
 
@@ -30,13 +35,14 @@
   --surface-foreground: #0b141b;
   --muted: #eaf0f4;
   --muted-foreground: #52616e;
-  --accent: #0e7d97;
+  --accent: #8a5a12;
+  --accent-strong: #6b4109;
   --accent-foreground: #ffffff;
-  --panel: #e3f4f9;
-  --panel-foreground: #0b3d4a;
+  --panel: #fbf1de;
+  --panel-foreground: #4a3108;
   --border: #d8e1e8;
   --input: #c3ced7;
-  --ring: #0e7d97;
+  --ring: #8a5a12;
   color-scheme: light;
 }
 
@@ -48,6 +54,7 @@
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
   --color-accent: var(--accent);
+  --color-accent-strong: var(--accent-strong);
   --color-accent-foreground: var(--accent-foreground);
   --color-panel: var(--panel);
   --color-panel-foreground: var(--panel-foreground);
@@ -108,6 +115,29 @@
     color: var(--accent-foreground);
   }
 
+  :root {
+    caret-color: var(--accent);
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 999px;
+  }
+
+  a {
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+  }
+
   :focus-visible {
     outline: 2px solid var(--ring);
     outline-offset: 2px;
@@ -128,23 +158,25 @@
   }
 }
 
-/* Fondo del hero: cuadrícula sutil + resplandor cian, nada de bloque sólido */
+/* Fondo del hero: una sola fuente de luz (arriba a la derecha) + cuadrícula sutil */
 .dd-hero-bg {
   background:
-    radial-gradient(ellipse 62% 88% at 72% 18%, color-mix(in srgb, var(--accent) 14%, transparent), transparent 70%),
-    radial-gradient(ellipse 45% 60% at 12% 90%, color-mix(in srgb, var(--accent) 7%, transparent), transparent 70%),
+    radial-gradient(ellipse 70% 90% at 78% 8%, color-mix(in srgb, var(--accent) 16%, transparent), transparent 68%),
     linear-gradient(to right, color-mix(in srgb, var(--foreground) 4%, transparent) 1px, transparent 1px),
     linear-gradient(to bottom, color-mix(in srgb, var(--foreground) 4%, transparent) 1px, transparent 1px);
   background-size:
-    100% 100%,
     100% 100%,
     52px 52px,
     52px 52px;
 }
 
-/* Borde de acento para tarjetas destacadas */
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Resplandor de pantalla (emisión real, no border+shadow): una sola capa de
+   elevación, sin hairline — un borde y una sombra difusa juntos en el mismo
+   elemento es físicamente contradictorio (uno dice plano, el otro flotando). */
 .dd-glow-border {
-  box-shadow:
-    0 0 0 1px color-mix(in srgb, var(--accent) 35%, transparent),
-    0 12px 44px -18px color-mix(in srgb, var(--accent) 30%, transparent);
+  box-shadow: 0 18px 50px -12px color-mix(in srgb, var(--accent) 32%, transparent);
 }

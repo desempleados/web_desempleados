@@ -114,7 +114,7 @@ export function Footer() {
             <ul className="mt-4 space-y-2.5">
               {sections.map((s) => (
                 <li key={s.to}>
-                  <Link to={s.to} className="text-sm underline-offset-4 hover:text-accent hover:underline">
+                  <Link to={s.to} className="text-sm underline-offset-4 hover:text-accent hover:underline active:text-accent-strong">
                     {s.label}
                   </Link>
                 </li>
@@ -126,12 +126,12 @@ export function Footer() {
             <h2 className="font-mono text-xs text-muted-foreground uppercase">{t.footer.account}</h2>
             <ul className="mt-4 space-y-2.5">
               <li>
-                <Link to="/login" className="text-sm underline-offset-4 hover:text-accent hover:underline">
+                <Link to="/login" className="text-sm underline-offset-4 hover:text-accent hover:underline active:text-accent-strong">
                   {t.footer.loginLink}
                 </Link>
               </li>
               <li>
-                <Link to="/registro" className="text-sm underline-offset-4 hover:text-accent hover:underline">
+                <Link to="/registro" className="text-sm underline-offset-4 hover:text-accent hover:underline active:text-accent-strong">
                   {t.footer.registerLink}
                 </Link>
               </li>
@@ -139,7 +139,7 @@ export function Footer() {
             <h2 className="mt-6 font-mono text-xs text-muted-foreground uppercase">{t.footer.contact}</h2>
             <ul className="mt-4 space-y-2.5">
               <li>
-                <a href={`mailto:${EMAIL}`} className="inline-flex items-center gap-2 text-sm underline-offset-4 hover:text-accent hover:underline">
+                <a href={`mailto:${EMAIL}`} className="inline-flex items-center gap-2 text-sm underline-offset-4 hover:text-accent hover:underline active:text-accent-strong">
                   <Mail aria-hidden="true" className="size-4" />
                   {EMAIL}
                 </a>
@@ -168,7 +168,7 @@ export function Footer() {
                       target="_blank"
                       rel="noreferrer"
                       aria-label={label}
-                      className="inline-flex size-9 items-center justify-center rounded-chip border border-border text-muted-foreground transition-colors hover:border-accent hover:text-accent"
+                      className="inline-flex size-9 items-center justify-center rounded-chip border border-border text-muted-foreground transition-colors active:scale-[0.94] hover:border-accent hover:text-accent active:text-accent-strong"
                     >
                       <Icon className="size-4" />
                     </a>

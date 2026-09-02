@@ -40,7 +40,7 @@ export function About() {
                   href={m.github}
                   target="_blank"
                   rel="noreferrer"
-                  className="mt-auto inline-flex w-fit items-center gap-2 pt-5 font-mono text-sm text-muted-foreground underline-offset-4 hover:text-accent hover:underline"
+                  className="mt-auto inline-flex w-fit items-center gap-2 pt-5 font-mono text-sm text-muted-foreground underline-offset-4 hover:text-accent hover:underline active:text-accent-strong"
                 >
                   <GithubIcon className="size-4" />
                   {t.aboutPage.github}
