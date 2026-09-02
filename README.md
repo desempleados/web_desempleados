@@ -18,6 +18,22 @@ npm run preview   # sirve dist/ en http://localhost:4173
 
 Deploy: `npm run build` y apunta Vercel/Netlify a `dist` (o conecta el repo y usa el preset de Vite).
 
+### Clerk en producción
+
+Clerk necesita, por defecto, un subdominio `clerk.tudominio.com` para servir su script y
+su API. Si el login queda en blanco en producción, casi siempre es porque falta ese
+registro DNS. Dos formas de resolverlo:
+
+1. **DNS (recomendado, sin código):** en el dashboard de Clerk → *Domains*, agregá el
+   dominio de producción y creá el CNAME que te indique en tu proveedor de DNS. No
+   requiere tocar `VITE_CLERK_PROXY_URL`.
+2. **Proxy por tu propio dominio (si no podés crear ese subdominio):** definí
+   `VITE_CLERK_PROXY_URL=/__clerk` como variable de entorno en Vercel y agregá en
+   `vercel.json` un rewrite de `/__clerk/(.*)` hacia el *Frontend API* de tu instancia
+   de Clerk (lo ves en Clerk Dashboard → API Keys). `src/main.tsx` ya pasa esa variable
+   como `proxyUrl` a `ClerkProvider` (la prop soportada por `@clerk/react` v6 —
+   `clerkJSUrl` no existe y rompe el build).
+
 ## Dónde editar el contenido
 
 | Qué                        | Archivo                                   |
