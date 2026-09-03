@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
 import { Badge } from '@/components/ui/badge'
 import { buttonVariants } from '@/components/ui/button'
+import { HeroAsciiArt } from '@/components/HeroAsciiArt'
 import { ProjectShot } from '@/components/ProjectShot'
 import { SectionHeading } from '@/components/SectionHeading'
 import { DiscordIcon, GithubIcon } from '@/components/Footer'
@@ -13,24 +14,6 @@ import { useI18n } from '@/i18n'
 import { cn, formatPrice } from '@/lib/utils'
 
 const WHY_ICONS = [MessageCircle, Clock, Braces]
-
-/** Placeholder honesto: nada de terminal simulada tipeando — cuando haya un
- * proyecto real que mostrar, esto se reemplaza por su captura real. */
-function HeroPreview() {
-  const { t } = useI18n()
-  return (
-    <div className="hidden overflow-hidden rounded-card border border-dashed border-input bg-background/40 lg:block" aria-hidden="true">
-      <div className="flex items-center gap-1.5 border-b border-dashed border-input px-4 py-2.5">
-        <span className="size-2.5 rounded-full bg-muted" />
-        <span className="size-2.5 rounded-full bg-muted" />
-        <span className="size-2.5 rounded-full bg-muted" />
-      </div>
-      <div className="flex h-44 items-center justify-center">
-        <p className="font-mono text-xs text-muted-foreground/70">{t.hero.previewPending}</p>
-      </div>
-    </div>
-  )
-}
 
 function Hero() {
   const { t } = useI18n()
@@ -53,7 +36,7 @@ function Hero() {
           </div>
           <p className="mt-10 font-mono text-xs text-muted-foreground">{t.hero.stackLine}</p>
         </div>
-        <HeroPreview />
+        <HeroAsciiArt />
       </div>
     </section>
   )

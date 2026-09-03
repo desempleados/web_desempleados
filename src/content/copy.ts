@@ -23,7 +23,6 @@ const es = {
     ctaPrimary: 'Empezar mi proyecto',
     ctaSecondary: 'Ver proyectos',
     stackLine: 'TypeScript · React · Node.js · Python · PostgreSQL · Discord.js',
-    previewPending: 'Vista previa próximamente',
   },
   home: {
     projectsTitle: 'Ya lo construimos',
@@ -183,7 +182,6 @@ const en: Dict = {
     ctaPrimary: 'Start my project',
     ctaSecondary: 'See projects',
     stackLine: 'TypeScript · React · Node.js · Python · PostgreSQL · Discord.js',
-    previewPending: 'Preview coming soon',
   },
   home: {
     projectsTitle: 'We already built this',
